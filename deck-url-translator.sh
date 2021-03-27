@@ -1,0 +1,245 @@
+#! /usr/bin/env bash
+
+##########################################################################
+# Title      :  deck-url-translator.sh
+# Author     :  Valgrut
+# Date       :  16.02.2021
+# Category   :  URL generator, web, magic the gathering
+##########################################################################
+# Description
+# 	Script that prints direct urls to cards from list.
+# 	Script is able to download list of cards by deck ID from mtggoldfish and generate urls for cernyrytir.cz
+#
+# 	Script expects following columnt format:
+# 		| Num | CardName |
+#
+# Usage
+#
+##########################################################################
+
+#TODO: Possibly open url in browser, if option provided.
+#TODO: add -h --help
+#TODO: --deck-id=XXXX    #maybe make possible this opt multipletimes
+#TODO: --source=cernyrytir [default] | najada
+#TODO: --file=filewithcardlist.txt  #maybe make possible this opt multipletimes
+
+# TODO Pridat testy dle testovacich karet. Pridat do testovacich karet karty v noven formatu. generovani pro najadu a rytire.
+# TODO u najady je problem ze odkaz je klikatelny pouze po znaky ' nebo ( nebo )
+# TODO list cards that could not be found and where search failed or was unsuccesful
+# TODO add option that activates direct transformation from deckid and print of urls
+# TODO add option print prices and availability in given store by parsing html code from curl.
+# TODO add option to compare prices and availability in stores
+
+# TODO Chci moct dat vice decku
+# TODO TODO: Pridat sumu ceny - budu muset naparsovat vsechny karty a zjistit nejlevnejsi verzi a tu zahrnout do vypoctu.
+
+#http://www.cernyrytir.cz
+# ?akce=3
+# &searchtype=card
+# &searchname=Valki, God of Lies // Tibalt, Cosmic Impostor
+
+# Example najada:
+# https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2Fcz%2Fkusovky-mtg%2F%3FAnchor%3DEShopSearchArticles%26Search%3D%26Sender%3DSubmit%26MagicCardSet%3D-1%26Type%5B0%5D%3D1&Search=$CARDNAME&MagicCardSet=-1&Sender=Submit#
+
+# https://stackoverflow.com/questions/296536/how-to-urlencode-data-for-curl-command
+# https://www.w3schools.com/tags/ref_urlencode.ASP
+# URL encoding:
+#  ',' = %2C
+#  ':' = %3A
+#  '&' = %26
+#  ')' = )
+#  '(' = (
+#  '.' = .
+#  '-' = -
+#  '"' = %22
+#  ''' = %27
+#  '`' =
+#  ' ' = +
+#######################################################################################
+
+function show_help
+{
+	echo "Usage:"
+	echo "	deck-url-transformator.sh [-h] [--deck-id DECK_ID] [--web cernyrytir|najada] [--deck-file FILE]"
+}
+
+# Function that encodes card name into url-valid form
+function urlencode_card_name
+{
+	echo "$1" | sed -e 's/^[ \t]*//' | tr -d '\n' | jq -sRr @uri
+}
+
+# Functions modifying the url for "cernytyrir" search
+function modify_card_url
+{
+    # mapping
+    # array=( "s/%C2%B4/%B4/g" )
+    # or 
+    # array["%C2%B4"] = "%B4"
+    # for mapping in array:
+    #   echo $1 | sed "s/$mapping/array[$mapping]/g"
+	echo "$1" | sed "s/%C2%B4/%B4/g" | sed "s/'/%B4/g" | sed "s/(/%28/g" | sed "s/)/%29/g" | sed "s/\?/%3F/g" | sed "s/!/%21/g"
+}
+
+function modify_card_url_for_najada
+{
+	echo "$1" | sed "s/%20/+/g"
+}
+
+# Function that checks format of given line of processed list.
+function check_format
+{
+	if echo "$1" | awk '{print $0}' | grep -E -v '^[0-9]+'; then
+		return 1
+	fi
+
+    # Ok, contains number at first columnt
+	return 0
+}
+
+# Detect new format of deck list (from tappedout or mtggoldfish)
+function contains_edition
+{
+    if echo "$1" | awk '{print $0}' | grep -q -E -v '\([a-zA-Z0-9]{3,7}\) ?[0-9]{0,4}$'; then
+		return 0
+	fi
+	return 1
+}
+
+function strip_edition
+{
+    echo "$1" | sed -r 's/ \([a-zA-Z0-9]{3,7}\) ?[0-9]{0,4}//'
+}
+
+function detect_comment_line
+{
+
+    if echo "$1" | awk '{print $0}' | grep -q -E -v '^#'; then
+		# Not a comment
+        return 0
+	fi
+    
+    # Comment
+	return 1
+}
+
+# Function that generates urls for given website from list of cards in provided file
+function process_deck
+{
+	input="$1" #deck with card list
+
+	LINE_CNT=1
+	if [ -f "$input" ]; then
+		while IFS= read -r line
+		do
+            # Skip lines that start with #
+            if ! detect_comment_line $line; then
+                continue
+            fi
+
+			if ! check_format $line; then
+				echo "Error: First word on line $LINE_CNT is not numeric. ($line)"
+				continue
+			fi
+
+			cardname="${line:1}"
+  
+            # Check if card version and edition is at the end
+            if contains_edition "$cardname"; then
+                # Remove edition and number from card name
+                cardname=$(strip_edition "$cardname")
+            fi
+
+			encoded=$(urlencode_card_name "$cardname")
+			if [[ $target_web == "cernyrytir" ]]; then
+				modified=$(modify_card_url "$encoded")
+				card_url="http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=$modified"
+				if [[ $show_info -eq 1 ]]; then
+					get_info_about_card_cernyrytir "$card_url" "$cardname"
+				else
+					#echo "$card_url"
+					echo "${card_url: : -3}" #fast fix
+				fi
+			fi
+
+			if [[ $target_web == "najada" ]]; then
+				najadamodified=$(modify_card_url_for_najada "$encoded")
+				echo "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
+			fi
+			(( LINE_CNT++ ))
+
+		done < "$input"
+		exit 0
+	else
+		echo "Error: File $input does not exist."
+	fi
+}
+
+function get_info_about_card_cernyrytir
+{
+	card_url="$1"
+	card_name="$2"
+	web_curl=$(curl -s "$card_url")
+	#price=$(echo "$web_curl" | grep -F -A 20 ">$card_name</font>" | grep -o -E "bolder;\">8&nbsp;K<" | grep -o -E '[0-9]+')
+	price=0
+	availability=$(echo "$web_curl" | grep -F -A 20 ">$card_name</font>" | grep -o -E "[0-9]+\&nbsp;ks" | grep -o -E '[0-9]+')
+	echo "$card_name, ks: $availability, price: $price Kc"
+}
+
+# A POSIX variable
+OPTIND=1  # Reset in case getopts has been used previously in the shell.
+
+# Initialize our own variables:
+card_list_file=""
+deck_id=""
+target_web="cernyrytir"
+show_info=0
+verbose=0
+
+#while getopts "h?dwf:" opt; do
+while [[ "$#" -gt 0 ]]; do
+	case $1 in
+		-h|--help)
+			show_help
+			exit 0
+			;;
+		-d|--deck_id)  deck_id="$2"; shift
+			;;
+		-w|--web)  target_web="$2"; shift
+			;;
+		-f|--file)  card_list_file="$2"; shift
+			;;
+		-i|--info)  show_info=1; shift
+			;;
+		*) echo "Unknown parameter passed: $1"; exit 1
+			;;
+	esac
+	shift
+done
+
+#shift $((OPTIND-1))
+
+#[ "${1:-}" = "--" ] && shift
+
+echo $card_list_file $deck_id $target_web
+
+
+#input="$1"  # input - text file with card names
+input="$card_list_file"
+process_deck "$input"
+
+# Download deck (card) list from mtggoldfish.com by deck ID
+# If provided param is number (deck ID from mtggoldfish.com)
+if echo "$input" | grep -qE '^[0-9]+$'; then
+	echo "Downloading card list of deck $input"
+
+	# Save card list into file
+	curl https://www.mtggoldfish.com/deck/download/$input | tee $input.txt
+
+	process_deck "$input.txt"
+
+	exit 0
+else
+	echo "Error: Wrong format of deck ID. Only numbers allowed."
+fi
+
