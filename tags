@@ -1,0 +1,25 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+check_format	deck-url-translator.sh	/^function check_format$/;"	f
+contains_edition	deck-url-translator.sh	/^function contains_edition$/;"	f
+detect_comment_line	deck-url-translator.sh	/^function detect_comment_line$/;"	f
+get_info_about_card_cernyrytir	box-price-comparator.sh	/^function get_info_about_card_cernyrytir$/;"	f
+get_info_about_card_cernyrytir	deck-url-translator.sh	/^function get_info_about_card_cernyrytir$/;"	f
+modify_card_url	deck-url-translator.sh	/^function modify_card_url$/;"	f
+modify_card_url_for_najada	deck-url-translator.sh	/^function modify_card_url_for_najada$/;"	f
+parse_blacklotus	box-price-comparator.sh	/^function parse_blacklotus$/;"	f
+parse_cernyrytir	box-price-comparator.sh	/^function parse_cernyrytir$/;"	f
+parse_fantasyobchod	box-price-comparator.sh	/^function parse_fantasyobchod$/;"	f
+parse_kal_el	box-price-comparator.sh	/^function parse_kal_el$/;"	f
+parse_najada	box-price-comparator.sh	/^function parse_najada$/;"	f
+parse_rishada	box-price-comparator.sh	/^function parse_rishada$/;"	f
+parse_veselydrak	box-price-comparator.sh	/^function parse_veselydrak$/;"	f
+process_deck	deck-url-translator.sh	/^function process_deck$/;"	f
+show_help	box-price-comparator.sh	/^function show_help$/;"	f
+show_help	deck-url-translator.sh	/^function show_help$/;"	f
+strip_edition	deck-url-translator.sh	/^function strip_edition$/;"	f
+urlencode_card_name	deck-url-translator.sh	/^function urlencode_card_name$/;"	f
