@@ -18,7 +18,6 @@
 ##########################################################################
 
 #TODO: Possibly open url in browser, if option provided.
-#TODO: add -h --help
 #TODO: --deck-id=XXXX    #maybe make possible this opt multipletimes
 #TODO: --source=cernyrytir [default] | najada
 #TODO: --file=filewithcardlist.txt  #maybe make possible this opt multipletimes
@@ -60,7 +59,7 @@
 function show_help
 {
 	echo "Usage:"
-	echo "	deck-url-transformator.sh [-h] [--deck-id DECK_ID] [--web cernyrytir|najada] [--deck-file FILE]"
+	echo "	deck-url-transformator.sh [-h] [--deck-id DECK_ID] [--web cernyrytir|najada] [--deck-file FILE] [-o|--open]"
 }
 
 # Function that encodes card name into url-valid form
@@ -164,7 +163,11 @@ function process_deck
 
 			if [[ $target_web == "najada" ]]; then
 				najadamodified=$(modify_card_url_for_najada "$encoded")
-				echo "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
+				if [[ $open_in_browser == 0 ]]; then
+					echo "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
+				else
+					firefox "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
+				fi
 			fi
 			(( LINE_CNT++ ))
 
@@ -195,6 +198,7 @@ deck_id=""
 target_web="cernyrytir"
 show_info=0
 verbose=0
+open_in_browser=0
 
 #while getopts "h?dwf:" opt; do
 while [[ "$#" -gt 0 ]]; do
@@ -210,6 +214,8 @@ while [[ "$#" -gt 0 ]]; do
 		-f|--file)  card_list_file="$2"; shift
 			;;
 		-i|--info)  show_info=1; shift
+			;;
+		-o|--open)  open_in_browser=1; shift
 			;;
 		*) echo "Unknown parameter passed: $1"; exit 1
 			;;
