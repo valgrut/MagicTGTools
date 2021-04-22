@@ -2,9 +2,10 @@
 
 ##########################################################################
 # Title      :  deck-url-translator.sh
-# Author     :  Valgrut
+# Author     :  Jiri Peska
 # Date       :  16.02.2021
 # Category   :  URL generator, web, magic the gathering
+# Repository :  https://github.com/valgrut/MagicTGTools
 ##########################################################################
 # Description
 # 	Script that prints direct urls to cards from list.

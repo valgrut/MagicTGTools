@@ -106,4 +106,6 @@ deck-url-transformator.sh [-h|--help] [-d|--deck-id DECK_ID] [-w|--web cernyryti
 ./deck-url-transformator.sh -w cernyrytir -f my_commander_deck.txt -o
 ```
 
+## Planovana rozsireni
+- pro zadane obchody porovnat ceny jednotlivych karet v zadanem seznamu
 
