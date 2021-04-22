@@ -109,3 +109,5 @@ deck-url-transformator.sh [-h|--help] [-d|--deck-id DECK_ID] [-w|--web cernyryti
 ## Planovana rozsireni
 - pro zadane obchody porovnat ceny jednotlivych karet v zadanem seznamu
 
+## Spusteni skriptu online v prohlizeci [ozkouset]
+Pouzitelny je primarne v linuxovem terminalu na linuxu a macu nebo ve Windows Terminal na Windows. Pro spusteni ale lze pouzit i online compiler treba [zde][https://www.jdoodle.com/test-bash-shell-script-online/]. Staci sem zkopirovat zdrojovy kod skriptu, do inputs balik a do commandLine arguments napsat "-f"
