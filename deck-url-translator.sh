@@ -39,7 +39,7 @@ set -euo pipefail
 function show_help
 {
 	echo "Usage:"
-	echo "	deck-url-transformator.sh [-h] [--deck-id DECK_ID] [--web cernyrytir|najada] [--deck-file FILE] [-o|--open]"
+	echo "	deck-url-transformator.sh [-h|--help] [-d|--deck-id| DECK_ID] [-w|--web cernyrytir|najada] [-f|--deck-file FILE] [-o|--open]"
 }
 
 # Function that encodes card name into url-valid form
@@ -121,7 +121,7 @@ function process_deck
 				continue
 			fi
 
-			cardname="${line:1}"
+			cardname="$(echo $line | sed 's/^[0-9]* //g')"
 
 	    # Check if card version and edition is at the end
 	    if contains_edition "$cardname"; then
@@ -136,11 +136,11 @@ function process_deck
 		    if [[ $show_info -eq 1 ]]; then
 			    get_info_about_card_cernyrytir "$card_url" "$cardname"
 		    else
-		    	    if [[ $open_in_browser == 0 ]]; then
-				#echo "${card_url: : -3}" #remove last 3 characters
-				echo "$card_url"
+			    if [[ $open_in_browser == 0 ]]; then
+				    #echo "${card_url: : -3}" #remove last 3 characters
+				    echo "$card_url"
 			    else
-				firefox -new-tab "$card_url"
+				    firefox -new-tab "$card_url"
 			    fi
 		    fi
 	    fi
