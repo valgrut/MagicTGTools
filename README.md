@@ -1,7 +1,9 @@
 # MagicTGTools
 Tools for Magic the Gathering related tasks.
 
-Zlepsovaky pro magic the gathering.
+Chces-li si koupit commander deck nakupem jednotlivych karet, tak v nejakem stadiu musis kazdou kartu zadat do vyhledavani na prislusnem obchodu. Coz pro desitky karet muze byt docela nudna prace. Tento skript ti umozni ze seznamu karet, ktery ziskas na webech jako tappedout nebo mtggoldfish, vygenerovat seznam url, na ktere pak staci jen ctrl+klik-nout a rovnou se ocitnes na strance karty.
+
+Skript vygeneruje odkazy pro vsechny karty v seznamu.
 
 ## deck-url-transformator.sh
 Tento skript prevede vstupni list karet na url adresy pro obchody cernyrytir.cz nebo najada.cz
