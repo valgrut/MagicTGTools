@@ -27,7 +27,7 @@ Skript vygeneruje z tohoto seznamu seznam url pomoci:
 deck-url-transformator.sh -f deck.txt
 ```
 
-Vystup:
+Vystup pro **cernyrytir**:
 ```
 http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Auramancer%B4s%20Guise
 http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Authority%20of%20the%20Consuls
@@ -41,6 +41,22 @@ http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Cartouche%20of
 http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Chamber%20of%20Manipulation
 http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Circle%20of%20Protection%3A%20Artifacts
 http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Circle%20of%20Protection%3A%20Black
+```
+
+Vystup pro **najada**:
+```
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Auramancer's+Guise&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Authority+of+the+Consuls&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Baird%2C+Steward+of+Argive&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Beastmaster's+Magemark&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Benevolent+Unicorn&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Blazing+Archon&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Capashen+Unicorn&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Cartouche+of+Knowledge&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Cartouche+of+Strength&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Chamber+of+Manipulation&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Circle+of+Protection%3A+Artifacts&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Circle+of+Protection%3A+Black&Sender=Submit&MagicCardSet=-1#
 ```
 
 ## Proc skript pouzit?
@@ -65,7 +81,7 @@ Tento vystupni list lze take presmerovat do souboru a pouzit ho pozdeji.
 ## Kde ziskat list karet v tomto formatu?
 List karet ve zminenem formatu lze napriklad exportovanim na **mtggoldfish** nebo na **tappedout**. Takovy seznam pak bude perfektne pouzitelny pro tento nastroj.
 
-Note: Dalsi stranky/formaty nez vyse zminene nebyly ozkouseny. Obecne ale pokud seznam splnuje format, url by to melo bez problemu vygenerovat.
+Note: Dalsi stranky/formaty nez vyse zminene nebyly odzkouseny. Obecne ale pokud seznam splnuje format, url by to melo bez problemu vygenerovat.
 
 
 ## Priklady pouziti

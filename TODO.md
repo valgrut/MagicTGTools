@@ -2,6 +2,5 @@
 - [ ] add GUI with drag and drop deck file and checker with target website to generate url
     - https://wxpython.org/Phoenix/docs/html/gallery.html
     - https://zetcode.com/wxpython/draganddrop/
-- [ ] pridat do README.md priklad z pouzitim a vystupem
 - [ ] moznost dat vice parametru -f a decky davat do pole, ktere se pak postupne projede a pro kazdy se vytvori vystupni osubor s listem odkazu
 - [ ] To samo pro --deck-id - moznost zadat vicekrat, pro kazdy vygenerovat output zvlast
