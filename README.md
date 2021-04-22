@@ -96,8 +96,8 @@ deck-url-transformator.sh [-h|--help] [-d|--deck-id DECK_ID] [-w|--web cernyryti
 # **Zakladni pouziti - vygeneruje seznam url dle karet ze souboru pro obchod cernyrytir**
 ./deck-url-transformator.sh -f my_commander_deck.txt
 
-# Stahne a vygeneruje url pro deck podle ID z https://www.mtggoldfish.com/deck/3932211
-./deck-url-transformator.sh -d 3932211
+# Stahne a vygeneruje url pro deck podle ID z https://www.mtggoldfish.com/deck/download/3909719
+./deck-url-transformator.sh -d 3909719
 
 # Vygeneruje URL karet ze souboru my_commander_deck.txt pro server najada **[pro najadu to jeste nema vychytane mouchy]**
 ./deck-url-transformator.sh -w najada -f my_commander_deck.txt

@@ -185,7 +185,6 @@ show_info=0
 verbose=0
 open_in_browser=0
 
-# while getopts "h?dwf:" opt; do
 # https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -209,18 +208,16 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-#shift $((OPTIND-1))
-
-#[ "${1:-}" = "--" ] && shift
-
 echo $card_list_file $deck_id $target_web
 
-
-#input="$1"  # input - text file with card names
 input="$card_list_file"
-dos2unix "$input"
-process_deck "$input"
+if [[ -f "$input" ]]; then # && [[ $input =~ "[0-9]" ]]; then
+    dos2unix "$input"
+    process_deck "$input"
+    exit 0
+fi
 
+input="$deck_id"
 # Download deck (card) list from mtggoldfish.com by deck ID
 # If provided param is number (deck ID from mtggoldfish.com)
 if echo "$input" | grep -qE '^[0-9]+$'; then
