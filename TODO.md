@@ -8,3 +8,5 @@
 - [ ] PROC TO TEDKA CROPNULO POSLEDNI 3 ZNAKY?!?!?!?!?!
 - [ ] pridat do README.md priklad z pouzitim a vystupem
 - [ ] pridat testovaci deck s tema (edice) (cosi) na konci a udelat na to testy ze to je ok.
+- [ ] moznost dat vice parametru -f a decky davat do pole, ktere se pak postupne projede a pro kazdy se vytvori vystupni osubor s listem odkazu
+- [ ] To samo pro --deck-id - moznost zadat vicekrat, pro kazdy vygenerovat output zvlast

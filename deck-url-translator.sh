@@ -17,10 +17,7 @@
 #
 ##########################################################################
 
-#TODO: Possibly open url in browser, if option provided.
-#TODO: --deck-id=XXXX    #maybe make possible this opt multipletimes
-#TODO: --source=cernyrytir [default] | najada
-#TODO: --file=filewithcardlist.txt  #maybe make possible this opt multipletimes
+set -euo pipefail
 
 # TODO Pridat testy dle testovacich karet. Pridat do testovacich karet karty v noven formatu. generovani pro najadu a rytire.
 # TODO u najady je problem ze odkaz je klikatelny pouze po znaky ' nebo ( nebo )
@@ -29,31 +26,14 @@
 # TODO add option print prices and availability in given store by parsing html code from curl.
 # TODO add option to compare prices and availability in stores
 
-# TODO Chci moct dat vice decku
 # TODO TODO: Pridat sumu ceny - budu muset naparsovat vsechny karty a zjistit nejlevnejsi verzi a tu zahrnout do vypoctu.
 
-#http://www.cernyrytir.cz
-# ?akce=3
-# &searchtype=card
-# &searchname=Valki, God of Lies // Tibalt, Cosmic Impostor
-
-# Example najada:
-# https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2Fcz%2Fkusovky-mtg%2F%3FAnchor%3DEShopSearchArticles%26Search%3D%26Sender%3DSubmit%26MagicCardSet%3D-1%26Type%5B0%5D%3D1&Search=$CARDNAME&MagicCardSet=-1&Sender=Submit#
-
+# Najada:
 # https://stackoverflow.com/questions/296536/how-to-urlencode-data-for-curl-command
 # https://www.w3schools.com/tags/ref_urlencode.ASP
 # URL encoding:
-#  ',' = %2C
-#  ':' = %3A
-#  '&' = %26
-#  ')' = )
-#  '(' = (
-#  '.' = .
-#  '-' = -
 #  '"' = %22
 #  ''' = %27
-#  '`' =
-#  ' ' = +
 #######################################################################################
 
 function show_help
@@ -71,12 +51,12 @@ function urlencode_card_name
 # Functions modifying the url for "cernytyrir" search
 function modify_card_url
 {
-    # mapping
-    # array=( "s/%C2%B4/%B4/g" )
-    # or 
-    # array["%C2%B4"] = "%B4"
-    # for mapping in array:
-    #   echo $1 | sed "s/$mapping/array[$mapping]/g"
+	# mapping
+	# array=( "s/%C2%B4/%B4/g" )
+	# or 
+	# array["%C2%B4"] = "%B4"
+	# for mapping in array:
+	#   echo $1 | sed "s/$mapping/array[$mapping]/g"
 	echo "$1" | sed "s/%C2%B4/%B4/g" | sed "s/'/%B4/g" | sed "s/(/%28/g" | sed "s/)/%29/g" | sed "s/\?/%3F/g" | sed "s/!/%21/g"
 }
 
@@ -93,13 +73,14 @@ function check_format
 	fi
 
     # Ok, contains number at first columnt
-	return 0
+    return 0
 }
 
 # Detect new format of deck list (from tappedout or mtggoldfish)
 function contains_edition
 {
-    if echo "$1" | awk '{print $0}' | grep -q -E -v '\([a-zA-Z0-9]{3,7}\) ?[0-9]{0,4}$'; then
+	if echo "$1" | awk '{print $0}' | grep -q -E -v '\( [a-zA-Z0-9]{2,7}\)?( [0-9]{1,4})?$'; then
+		# string does not contain edition and number
 		return 0
 	fi
 	return 1
@@ -107,19 +88,18 @@ function contains_edition
 
 function strip_edition
 {
-    echo "$1" | sed -r 's/ \([a-zA-Z0-9]{3,7}\) ?[0-9]{0,4}//'
+	echo "$1" | sed -r 's/ \([a-zA-Z0-9]{3,7}\) ?[0-9]{0,4}//'
 }
 
 function detect_comment_line
 {
-
-    if echo "$1" | awk '{print $0}' | grep -q -E -v '^#'; then
-		# Not a comment
-        return 0
+	# If Not a comment
+	if echo "$1" | awk '{print $0}' | grep -q -E -v '^#'; then
+		return 0
 	fi
-    
-    # Comment
-	return 1
+
+    # Comment detected
+    return 1
 }
 
 # Function that generates urls for given website from list of cards in provided file
@@ -131,10 +111,10 @@ function process_deck
 	if [ -f "$input" ]; then
 		while IFS= read -r line
 		do
-            # Skip lines that start with #
-            if ! detect_comment_line $line; then
-                continue
-            fi
+			# Skip lines that start with #
+			if ! detect_comment_line $line; then
+				continue
+			fi
 
 			if ! check_format $line; then
 				echo "Error: First word on line $LINE_CNT is not numeric. ($line)"
@@ -142,39 +122,43 @@ function process_deck
 			fi
 
 			cardname="${line:1}"
-  
-            # Check if card version and edition is at the end
-            if contains_edition "$cardname"; then
-                # Remove edition and number from card name
-                cardname=$(strip_edition "$cardname")
-            fi
 
-			encoded=$(urlencode_card_name "$cardname")
-			if [[ $target_web == "cernyrytir" ]]; then
-				modified=$(modify_card_url "$encoded")
-				card_url="http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=$modified"
-				if [[ $show_info -eq 1 ]]; then
-					get_info_about_card_cernyrytir "$card_url" "$cardname"
-				else
-					#echo "$card_url"
-					echo "${card_url: : -3}" #fast fix
-				fi
-			fi
+	    # Check if card version and edition is at the end
+	    if contains_edition "$cardname"; then
+		    # Remove edition and number from card name
+		    cardname=$(strip_edition "$cardname")
+	    fi
 
-			if [[ $target_web == "najada" ]]; then
-				najadamodified=$(modify_card_url_for_najada "$encoded")
-				if [[ $open_in_browser == 0 ]]; then
-					echo "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
-				else
-					firefox "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
-				fi
-			fi
-			(( LINE_CNT++ ))
+	    encoded=$(urlencode_card_name "$cardname")
+	    if [[ $target_web == "cernyrytir" ]]; then
+		    modified=$(modify_card_url "$encoded")
+		    card_url="http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=$modified"
+		    if [[ $show_info -eq 1 ]]; then
+			    get_info_about_card_cernyrytir "$card_url" "$cardname"
+		    else
+		    	    if [[ $open_in_browser == 0 ]]; then
+				#echo "${card_url: : -3}" #remove last 3 characters
+				echo "$card_url"
+			    else
+				firefox -new-tab "$card_url"
+			    fi
+		    fi
+	    fi
 
-		done < "$input"
-		exit 0
-	else
-		echo "Error: File $input does not exist."
+	    if [[ $target_web == "najada" ]]; then
+		    najadamodified=$(modify_card_url_for_najada "$encoded")
+		    if [[ $open_in_browser == 0 ]]; then
+			    echo "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
+		    else
+			    firefox -new-tab "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
+		    fi
+	    fi
+	    (( LINE_CNT++ ))
+
+    done < "$input"
+    exit 0
+else
+	echo "Error: File $input does not exist."
 	fi
 }
 
@@ -200,7 +184,8 @@ show_info=0
 verbose=0
 open_in_browser=0
 
-#while getopts "h?dwf:" opt; do
+# while getopts "h?dwf:" opt; do
+# https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
 while [[ "$#" -gt 0 ]]; do
 	case $1 in
 		-h|--help)
@@ -232,6 +217,7 @@ echo $card_list_file $deck_id $target_web
 
 #input="$1"  # input - text file with card names
 input="$card_list_file"
+dos2unix "$input"
 process_deck "$input"
 
 # Download deck (card) list from mtggoldfish.com by deck ID
@@ -241,6 +227,10 @@ if echo "$input" | grep -qE '^[0-9]+$'; then
 
 	# Save card list into file
 	curl https://www.mtggoldfish.com/deck/download/$input | tee $input.txt
+
+	# If file has been created in windows, file is formatted differently. 
+	# Convert file into unix format to get rid of ^M (ctrl+m) at the end of a line
+	dos2unix "$input.txt"
 
 	process_deck "$input.txt"
 
