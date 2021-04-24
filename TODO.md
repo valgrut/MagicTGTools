@@ -4,6 +4,7 @@
     - mrknout kde vsechny ty prasacke transormace url muzu oddelat (sed, ...)
 
 # TODOs
+- [ ] opravit bezparametricke prepinace (--url, --debug, ...)
 - [ ] add GUI with drag and drop deck file and checker with target website to generate url
     - https://wxpython.org/Phoenix/docs/html/gallery.html
     - https://zetcode.com/wxpython/draganddrop/
@@ -11,4 +12,8 @@
 - [ ] To samo pro --deck-id - moznost zadat vicekrat, pro kazdy vygenerovat output zvlast
 - [ ] pridat moznost vygenerovat i .html soubor kde budou ty linky jako [card_name][URL]
 - [ ] podpora pro magicshop a tolarie.cz
+
+
+
+- [ ] prepinac pro --url. Jestli bude pritomny, tak to vyplivne klasicke url, jestli nebude, tak default to vyplivne klikateny bash link
 

@@ -8,7 +8,7 @@ NC='\033[0m' # No Color
 
 shops=( 'cernyrytir' 'najada' 'rishada' 'magicshop' 'blacklotus')
 for shop in ${shops[@]}; do
-    ../deck-url-translator.sh -f testdecks/test_deck.txt -w $shop > $shop-output.txt
+    ../deck-url-translator.sh -f testdecks/test_deck.txt -w $shop --url > $shop-output.txt
     diff_out=$(diff $shop-output.txt $shop-ref-output.txt)
     rc=$?
     

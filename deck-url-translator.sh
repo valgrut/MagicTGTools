@@ -138,9 +138,12 @@ function process_deck
                     get_info_about_card_cernyrytir "$card_url" "$cardname"
                 else
                     if [[ $open_in_browser == 0 ]]; then
-                        #echo "${card_url: : -3}" #remove last 3 characters
-                        # echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
-                        echo "$card_url"
+                        if [[ $print_url == 1 ]]; then
+                            #echo "${card_url: : -3}" #remove last 3 characters
+                            echo "$card_url"
+                        else
+                            echo -e '\e]8;;http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname='$modified'\a'$cardname'\e]8;;\a'
+                        fi
                     else
                         firefox -new-tab "$card_url"
                     fi
@@ -150,8 +153,11 @@ function process_deck
             if [[ $target_web == "najada" ]]; then
                 najadamodified=$(modify_card_url_for_najada "$encoded")
                 if [[ $open_in_browser == 0 ]]; then
-                    # echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
-                    echo "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
+                    if [[ $print_url == 1 ]]; then
+                        echo "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
+                    else
+                        echo -e '\e]8;;https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search='$najadamodified'&Sender=Submit&MagicCardSet=-1#"\a'$cardname'\e]8;;\a'
+                    fi
                 else
                     firefox -new-tab "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
                 fi
@@ -161,8 +167,11 @@ function process_deck
             if [[ $target_web == "blacklotus" ]]; then
                 najadamodified=$(modify_card_url_for_najada "$encoded")
                 if [[ $open_in_browser == 0 ]]; then
-                    # echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
-                    echo "https://www.blacklotus.cz/vyhledavani/?string=$najadamodified"
+                    if [[ $print_url == 1 ]]; then
+                        echo "https://www.blacklotus.cz/vyhledavani/?string=$najadamodified"
+                    else
+                        echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
+                    fi
                 fi
             fi
 
@@ -170,8 +179,11 @@ function process_deck
             if [[ $target_web == "rishada" ]]; then
                 najadamodified=$(modify_card_url_for_najada "$encoded")
                 if [[ $open_in_browser == 0 ]]; then
-                    # echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
-                    echo "https://rishada.cz/hledani?fulltext=$najadamodified"
+                    if [[ $print_url == 1 ]]; then
+                        echo "https://rishada.cz/hledani?fulltext=$najadamodified"
+                    else
+                        echo -e '\e]8;;https://rishada.cz/hledani?fulltext='$najadamodified'\a'$cardname'\e]8;;\a'
+                    fi
                 fi
             fi
 
@@ -215,6 +227,8 @@ target_web="cernyrytir" #Default
 show_info=0
 verbose=0
 open_in_browser=0
+print_url=0
+DEBUG=0
 
 # https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
 while [[ "$#" -gt 0 ]]; do
@@ -225,7 +239,11 @@ while [[ "$#" -gt 0 ]]; do
             ;;
         -d|--deck_id)  deck_id="$2"; shift
             ;;
+        -D|--DEBUG)  DEBUG=1;
+            ;;
         -w|--web)  target_web="$2"; shift
+            ;;
+        -u|--url)  print_url="1";
             ;;
         -f|--file)  card_list_file="$2"; shift
             ;;
