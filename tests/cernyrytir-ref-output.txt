@@ -1,4 +1,3 @@
-testdecks/test_deck.txt cernyrytir
 http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Adarkar%20Unicorn
 http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Aether%20Tunnel
 http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=Kruphix%B4s%20Insight

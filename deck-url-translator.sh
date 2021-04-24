@@ -50,7 +50,7 @@ function urlencode_card_name
 }
 
 # Functions modifying the url for "cernytyrir" search
-function modify_card_url
+function modify_card_url_for_cernyrytir
 {
     # mapping
     # array=( "s/%C2%B4/%B4/g" )
@@ -132,7 +132,7 @@ function process_deck
 
             encoded=$(urlencode_card_name "$cardname")
             if [[ $target_web == "cernyrytir" ]]; then
-                modified=$(modify_card_url "$encoded")
+                modified=$(modify_card_url_for_cernyrytir "$encoded")
                 card_url="http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname=$modified"
                 if [[ $show_info -eq 1 ]]; then
                     get_info_about_card_cernyrytir "$card_url" "$cardname"
@@ -174,13 +174,23 @@ function get_info_about_card_cernyrytir
     echo "$card_name, ks: $availability, price: $price Kc"
 }
 
+function generate_urls 
+{
+    deck="$1"
+    
+    # If file has been created in windows, file is formatted differently.
+    # Convert file into unix format to get rid of ^M (ctrl+m) at the end of a line
+    dos2unix -q "$deck"
+    process_deck "$deck"
+}
+
 # A POSIX variable
 OPTIND=1  # Reset in case getopts has been used previously in the shell.
 
 # Initialize our own variables:
 card_list_file=""
 deck_id=""
-target_web="cernyrytir"
+target_web="cernyrytir" #Default
 show_info=0
 verbose=0
 open_in_browser=0
@@ -208,37 +218,27 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-echo $card_list_file $deck_id $target_web
-
-input="$card_list_file"
-if [[ -f "$input" ]]; then # && [[ $input =~ "[0-9]" ]]; then
-    dos2unix -q "$input"
-    process_deck "$input"
+# Input is local file with card list
+if [[ -f "$card_list_file" && $deck_id -eq "" ]]; then
+    generate_urls "$card_list_file"
     exit 0
 else
-    input="$deck_id"
-    if [[ $input -eq "" ]]; then
-        echo "Soubor $input nebyl nalezen."
-        exit 1
-    fi
-
-    # Download deck (card) list from mtggoldfish.com by deck ID
-    # If provided param is number (deck ID from mtggoldfish.com)
-    if echo "$input" | grep -qE '^[0-9]+$'; then
-        echo "Downloading card list of deck $input"
-
-        # Save card list into file
-        curl https://www.mtggoldfish.com/deck/download/$input | tee $input.txt
-
-        # If file has been created in windows, file is formatted differently.
-        # Convert file into unix format to get rid of ^M (ctrl+m) at the end of a line
-        dos2unix -q "$input.txt"
-
-        process_deck "$input.txt"
-
-        exit 0
-    else
-        echo "Error: Wrong format of deck ID. Only numbers allowed."
-    fi
-
+    echo "Soubor $card_list_file nebyl nalezen."
+    exit 1
 fi
+
+# Download deck (card list) from mtggoldfish.com by deck ID
+# If provided param is number (deck ID from mtggoldfish.com)
+if echo "$deck_id" | grep -qE '^[0-9]+$'; then
+    # echo "Downloading card list of deck $deck_id"
+    # Save card list into file
+    curl https://www.mtggoldfish.com/deck/download/$deck_id | tee $deck_id.txt
+
+    generate_urls "$deck_id.txt"
+
+    exit 0
+else
+    echo "Error: Wrong format of deck ID. Only numbers allowed."
+    exit 1
+fi
+
