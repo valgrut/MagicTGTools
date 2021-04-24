@@ -139,6 +139,7 @@ function process_deck
                 else
                     if [[ $open_in_browser == 0 ]]; then
                         #echo "${card_url: : -3}" #remove last 3 characters
+                        # echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
                         echo "$card_url"
                     else
                         firefox -new-tab "$card_url"
@@ -149,11 +150,31 @@ function process_deck
             if [[ $target_web == "najada" ]]; then
                 najadamodified=$(modify_card_url_for_najada "$encoded")
                 if [[ $open_in_browser == 0 ]]; then
+                    # echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
                     echo "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
                 else
                     firefox -new-tab "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
                 fi
             fi
+            
+            # black lotus
+            if [[ $target_web == "blacklotus" ]]; then
+                najadamodified=$(modify_card_url_for_najada "$encoded")
+                if [[ $open_in_browser == 0 ]]; then
+                    # echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
+                    echo "https://www.blacklotus.cz/vyhledavani/?string=$najadamodified"
+                fi
+            fi
+
+            # rishada
+            if [[ $target_web == "rishada" ]]; then
+                najadamodified=$(modify_card_url_for_najada "$encoded")
+                if [[ $open_in_browser == 0 ]]; then
+                    # echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
+                    echo "https://rishada.cz/hledani?fulltext=$najadamodified"
+                fi
+            fi
+
             (( LINE_CNT++ ))
 
         done < "$input"

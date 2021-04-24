@@ -20,3 +20,6 @@ for shop in ${shops[@]}; do
     
     rm "$shop-output.txt"
 done
+
+
+#TODO: pridat karty s nazvy se znaky: : , / " -   a zkontrolovat
