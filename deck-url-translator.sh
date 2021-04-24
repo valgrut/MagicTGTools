@@ -212,28 +212,33 @@ echo $card_list_file $deck_id $target_web
 
 input="$card_list_file"
 if [[ -f "$input" ]]; then # && [[ $input =~ "[0-9]" ]]; then
-    dos2unix "$input"
+    dos2unix -q "$input"
     process_deck "$input"
     exit 0
-fi
-
-input="$deck_id"
-# Download deck (card) list from mtggoldfish.com by deck ID
-# If provided param is number (deck ID from mtggoldfish.com)
-if echo "$input" | grep -qE '^[0-9]+$'; then
-    echo "Downloading card list of deck $input"
-
-    # Save card list into file
-    curl https://www.mtggoldfish.com/deck/download/$input | tee $input.txt
-
-    # If file has been created in windows, file is formatted differently.
-    # Convert file into unix format to get rid of ^M (ctrl+m) at the end of a line
-    dos2unix "$input.txt"
-
-    process_deck "$input.txt"
-
-    exit 0
 else
-    echo "Error: Wrong format of deck ID. Only numbers allowed."
-fi
+    input="$deck_id"
+    if [[ $input -eq "" ]]; then
+        echo "Soubor $input nebyl nalezen."
+        exit 1
+    fi
 
+    # Download deck (card) list from mtggoldfish.com by deck ID
+    # If provided param is number (deck ID from mtggoldfish.com)
+    if echo "$input" | grep -qE '^[0-9]+$'; then
+        echo "Downloading card list of deck $input"
+
+        # Save card list into file
+        curl https://www.mtggoldfish.com/deck/download/$input | tee $input.txt
+
+        # If file has been created in windows, file is formatted differently.
+        # Convert file into unix format to get rid of ^M (ctrl+m) at the end of a line
+        dos2unix -q "$input.txt"
+
+        process_deck "$input.txt"
+
+        exit 0
+    else
+        echo "Error: Wrong format of deck ID. Only numbers allowed."
+    fi
+
+fi

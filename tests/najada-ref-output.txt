@@ -1,0 +1,6 @@
+testdecks/test_deck.txt najada
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Adarkar+Unicorn&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Aether+Tunnel&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Kruphix's+Insight&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Academy+Ruins&Sender=Submit&MagicCardSet=-1#
+https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=Nimbus+Maze&Sender=Submit&MagicCardSet=-1#
