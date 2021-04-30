@@ -106,7 +106,11 @@ function detect_comment_line
 # Function that generates urls for given website from list of cards in provided file
 function process_deck
 {
-    input="$1" #deck with card list
+    input="$1" #deck file with card list
+
+    if [[ $export_as_html == 1 ]]; then
+        start_html "$input"
+    fi
 
     LINE_CNT=1
     if [ -f "$input" ]; then
@@ -130,6 +134,7 @@ function process_deck
                 cardname=$(strip_edition "$cardname")
             fi
 
+            # cernyrytir
             encoded=$(urlencode_card_name "$cardname")
             if [[ $target_web == "cernyrytir" ]]; then
                 modified=$(modify_card_url_for_cernyrytir "$encoded")
@@ -144,12 +149,16 @@ function process_deck
                         else
                             echo -e '\e]8;;http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname='$modified'\a'$cardname'\e]8;;\a'
                         fi
+                        if [[ $export_as_html == 1 ]]; then
+                            insert_html_card_link "$input" "$cardname" "$card_url"
+                        fi
                     else
                         firefox -new-tab "$card_url"
                     fi
                 fi
             fi
 
+            # najada
             if [[ $target_web == "najada" ]]; then
                 najadamodified=$(modify_card_url_for_najada "$encoded")
                 if [[ $open_in_browser == 0 ]]; then
@@ -158,11 +167,14 @@ function process_deck
                     else
                         echo -e '\e]8;;https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search='$najadamodified'&Sender=Submit&MagicCardSet=-1#"\a'$cardname'\e]8;;\a'
                     fi
+                    if [[ $export_as_html == 1 ]]; then
+                        insert_html_card_link "$input" "$cardname" "$card_url"
+                    fi
                 else
                     firefox -new-tab "https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search=$najadamodified&Sender=Submit&MagicCardSet=-1#"
                 fi
             fi
-            
+
             # black lotus
             if [[ $target_web == "blacklotus" ]]; then
                 najadamodified=$(modify_card_url_for_najada "$encoded")
@@ -171,6 +183,9 @@ function process_deck
                         echo "https://www.blacklotus.cz/vyhledavani/?string=$najadamodified"
                     else
                         echo -e '\e]8;;https://www.blacklotus.cz/vyhledavani/?string='$najadamodified'\a'$cardname'\e]8;;\a'
+                    fi
+                    if [[ $export_as_html == 1 ]]; then
+                        insert_html_card_link "$input" "$cardname" "$card_url"
                     fi
                 fi
             fi
@@ -184,15 +199,25 @@ function process_deck
                     else
                         echo -e '\e]8;;https://rishada.cz/hledani?fulltext='$najadamodified'\a'$cardname'\e]8;;\a'
                     fi
+                    if [[ $export_as_html == 1 ]]; then
+                        insert_html_card_link "$input" "$cardname" "$card_url"
+                    fi
                 fi
             fi
+
+            # mysticshop.cz
+            # TODO
 
             (( LINE_CNT++ ))
 
         done < "$input"
-        exit 0
+
     else
         echo "Error: File $input does not exist."
+    fi
+
+    if [[ $export_as_html == 1 ]]; then
+        end_html "$input"
     fi
 }
 
@@ -207,15 +232,52 @@ function get_info_about_card_cernyrytir
     echo "$card_name, ks: $availability, price: $price Kc"
 }
 
-function generate_urls 
+function generate_urls
 {
     deck="$1"
-    
+
     # If file has been created in windows, file is formatted differently.
     # Convert file into unix format to get rid of ^M (ctrl+m) at the end of a line
+    # https://www.suse.com/support/kb/doc/?id=000018317
     dos2unix -q "$deck"
     process_deck "$deck"
 }
+
+function start_html
+{
+    # gen html and body tags
+    deck_name="$1"
+    touch "$deck_name.html"
+    # Note: Quoting "END" will cause variables and commands to not expand
+    cat <<- END > "$deck_name.html"
+<html>
+<head>
+<title>$deck_name</title>
+</head>
+<body>
+<h3>$deck_name</h3>
+<ul>
+END
+}
+
+function end_html
+{
+    deck_name="$1"
+    cat <<- END >> "$deck_name.html"
+</ul>
+</body>
+</html>
+END
+}
+
+function insert_html_card_link
+{
+    html_file="$1.html"
+    card_name="$2"
+    card_link="$3"
+    echo "<li><a href='$card_link'>$card_name</a></li>" >> "$html_file"
+}
+
 
 # A POSIX variable
 OPTIND=1  # Reset in case getopts has been used previously in the shell.
@@ -229,6 +291,7 @@ verbose=0
 open_in_browser=0
 print_url=0
 DEBUG=0
+export_as_html=0
 
 # https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
 while [[ "$#" -gt 0 ]]; do
@@ -242,6 +305,8 @@ while [[ "$#" -gt 0 ]]; do
         -D|--DEBUG)  DEBUG=1;
             ;;
         -w|--web)  target_web="$2"; shift
+            ;;
+        -e|--html)  export_as_html="1";
             ;;
         -u|--url)  print_url="1";
             ;;
