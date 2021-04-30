@@ -88,7 +88,7 @@ Note: Dalsi stranky/formaty nez vyse zminene nebyly odzkouseny. Obecne ale pokud
 
 ## Priklady pouziti
 ```
-deck-url-transformator.sh [-h|--help] [-d|--deck-id DECK_ID] [-w|--web cernyrytir|najada] [-f|--deck-file FILE] [-o|--open]"
+deck-url-transformator.sh [-h|--help] [-d|--deck-id DECK_ID] [-w|--web cernyrytir|najada] [-f|--deck-file FILE] [-o|--open] [--html] [-u|--url]"
 
 # Vypise help a ukonci skript
 ./deck-url-transformator.sh -h
@@ -99,8 +99,14 @@ deck-url-transformator.sh [-h|--help] [-d|--deck-id DECK_ID] [-w|--web cernyryti
 # Stahne a vygeneruje url pro deck podle ID z https://www.mtggoldfish.com/deck/download/3909719
 ./deck-url-transformator.sh -d 3909719
 
-# Vygeneruje URL karet ze souboru my_commander_deck.txt pro server najada **[pro najadu to jeste nema vychytane mouchy]**
+# Vygeneruje stranku zobrazitelnou v prohlizeci s html odkazy na karty
+./deck-url-transformator.sh -w blacklotus -f my_commander_deck.txt --html
+
+# Vygeneruje seznam odkazu na karty ze souboru my_commander_deck.txt pro server najada
 ./deck-url-transformator.sh -w najada -f my_commander_deck.txt
+
+# Vygeneruje seznam url karet ze souboru my_commander_deck.txt pro server najada
+./deck-url-transformator.sh -w najada --url -f my_commander_deck.txt
 
 # Vygeneruje URL karet ze souboru a rovnou se url pokusi otevrit v prohlizeci firefox [zatim jen experimentalni]
 ./deck-url-transformator.sh -w cernyrytir -f my_commander_deck.txt -o
