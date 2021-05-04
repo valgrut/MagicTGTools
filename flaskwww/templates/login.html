@@ -1,10 +1,18 @@
-<!doctype html>
-<html>
-    <head>
-        <title>Personal page</title>
-    </head>
-    <body>
-        <h2>Your Personal Page</h2>
-        <p>Hello {{content}}, this is your personal page.</p>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1>Test</h1>
+    <form action="#" method="post">
+        <p>name:</p>
+        <p><input type="text" name="inputname"/></p>
+        <p><input type="submit" name="submit"/></p>
+    </form>
+{% endblock %}
