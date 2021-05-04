@@ -3,6 +3,8 @@ from datetime import timedelta
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 
+import url_generator
+
 # Bootstrap websites: https://getbootstrap.com/docs/5.0/examples/
 
 app = Flask(__name__)
