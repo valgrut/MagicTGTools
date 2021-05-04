@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Generated urls{% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <p>{{filename}}</p>
+
+    <!-- https://stackoverflow.com/questions/40980575/how-to-get-contents-from-a-local-text-file-to-print-on-individual-lines-in-a-htm -->
+    <ul>
+    {% for card in deck %}
+        <li><a href="#">{{card}}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
