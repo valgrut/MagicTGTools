@@ -13,9 +13,11 @@ app.permanent_session_lifetime = timedelta(days=5)
 app.config['UPLOAD_FOLDER'] = "./"
 app.config['MAX_CONTENT_PATH'] = "10000"
 
+
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -32,6 +34,7 @@ def login():
 
         return render_template("login.html")
 
+
 @app.route("/user")
 def user():
     if "user" in session:
@@ -41,20 +44,25 @@ def user():
         flash("You are not logged in")
         return redirect(url_for("login"))
 
+
 @app.route("/logout")
 def logout():
     flash("You have been logged out", "info")
     session.pop("user", None)
     return redirect(url_for("login"))
 
+
 @app.route('/upload')
 def upload_file():
     return render_template('upload.html')
+
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_input_file():
     if request.method == 'POST':
         f = request.files['file']
+        target_web = request.form['target_web']
+        flash(target_web + " is selected")
 
         # f.save(secure_filename(f.filename))
         f.save(f.filename)

@@ -12,6 +12,13 @@
 
 <form action = "http://localhost:5000/uploader" method = "POST" enctype = "multipart/form-data">
     <input type = "file" name = "file" />
+    <select name="target_web" width="100px">
+        <option value="cernyrytir">cernyrytir.cz</option>
+        <option value="najada">najada.cz</option>
+        <option value="blacklotus">blacklotus.cz</option>
+        <option value="rishada">rishada.cz</option>
+        <option value="mysticshop">mysticshop [not working]</option>
+    </select>
     <input type = "submit"/>
 </form>
 {% endblock %}
