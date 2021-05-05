@@ -1,6 +1,7 @@
 import re
 import urllib3
 from urllib.parse import quote
+from urllib.parse import quote_plus
 
 # TODO Prozkoumat jestli se to nebude hodit.
 #from urllib import urlopen
@@ -11,6 +12,7 @@ from urllib.parse import quote
 
 # variable accessible as modulename.variable
 somevariable = 42
+
 
 def strip_initial_digits(card_name):
     modified_name = re.sub("^([0-9]{1,3} )?", "", card_name)
@@ -23,7 +25,6 @@ def strip_set_and_ending_num(card_name):
 
 
 def strip_end_of_line_chars(card_name):
-    # modified_name = re.sub(r"\r\n", "", card_name)
     modified_name = re.sub(r"\n", "", card_name)
     return modified_name
 
@@ -38,13 +39,16 @@ def comment_detected(card_name):
 
 def encode_card_name_as_url(card_name):
     # https://www.w3schools.com/tags/ref_urlencode.ASP
-    urlencoded = quote(card_name, encoding='cp1250')
-    # urlencoded = quote(card_name, encoding='utf8')
-    return urlencoded
+    urlencoded = quote(card_name, encoding="cp1250")
     # return urlencoded.replace("%C2%B4", "%B4")
+    return urlencoded
+
+
+def encode_card_name_as_url_plus(card_name):
+    urlencoded = quote_plus(card_name, encoding="utf-8")
+    return urlencoded
 
 ####################################################
-# card = "1 Buried Ruin (2XM) 312"
 
 deck = open("deck.txt", "r")
 for card in deck:
@@ -53,9 +57,10 @@ for card in deck:
     card = strip_initial_digits(card)
     card = strip_set_and_ending_num(card)
     card = strip_end_of_line_chars(card)
-    card = encode_card_name_as_url(card)
+    cr_card = encode_card_name_as_url(card)
+    others_card = encode_card_name_as_url_plus(card)
     # print(f"'{card}'")
-    print(f"http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname={card}")
-
-# for card in ["  #something", "#", "# card name", "#card", "This should be false"]:
-    # print(detect_comment(card))
+    # print(f"http://cernyrytir.cz/index.php3?akce=3&searchtype=card&searchname={cr_card}")
+    
+    # print(f"'{others_card}'")
+    print(f"https://www.najada.cz/cz/kusovky-mtg/?Anchor=EShopSearchArticles&RedirUrl=https%3A%2F%2Fwww.najada.cz%2F&Search={others_card}&Sender=Submit&MagicCardSet=-1#")
