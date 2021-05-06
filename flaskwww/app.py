@@ -1,3 +1,4 @@
+import os
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from datetime import timedelta
 from werkzeug.utils import secure_filename
@@ -10,7 +11,7 @@ import url_generator
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.permanent_session_lifetime = timedelta(days=5)
-app.config['UPLOAD_FOLDER'] = "./"
+app.config['UPLOAD_FOLDER'] = "./uploaded/"
 app.config['MAX_CONTENT_PATH'] = "10000"
 
 
@@ -61,29 +62,28 @@ def upload_file():
 def upload_input_file():
     if request.method == 'POST':
         f = request.files['file']
+        if f.filename == "":
+            flash("File not selected!")
+            return render_template('upload.html')
+
         target_web = request.form['target_web']
         flash(target_web + " is selected")
+        flash("Filename:" + f.filename)
 
-        # f.save(secure_filename(f.filename))
-        f.save(f.filename)
-        flash('Deck has been uploaded successfully')
+        secured_filename = secure_filename(f.filename)
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename))
+        # flash('Deck has been uploaded successfully')
 
-        # process deck and print urls by given options from form (options like target web etc.)
-        deckfile = open("./" + f.filename, "r")
-        cards = deckfile.read().split('\n')
-        # TODO process and modify card urls based on options from form
-        # ...
-        deckfile.close()
-        return render_template('uploader.html', filename=f.filename, deck=cards)
+        cardurls = url_generator.process_deck(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename), target_web)
+        # TODO: process deck and print urls by given options from form (options like target web etc.)
 
+        # Remove deck file, no longer needed
+        if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename)):
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename))
 
-if __name__ == '__main__':
-    app.run(debug = True)
+        return render_template('uploader.html', filename=f.filename, card_urls=cardurls)
 
-
-# @app.route("/admin")
-# def admin():
-    # return redirect(url_for("home"))
+    return render_template('upload.html')
 
 if __name__ == "__main__":
     # TODO In production edit these:

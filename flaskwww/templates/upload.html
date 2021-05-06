@@ -10,7 +10,8 @@
 {% endwith %}
 <p>Welcome, {{user}}</p>
 
-<form action = "http://localhost:5000/uploader" method = "POST" enctype = "multipart/form-data">
+<!-- Maybe: https://stackoverflow.com/questions/32019733/getting-value-from-select-tag-using-flask -->
+<form action = "/uploader" method = "POST" enctype = "multipart/form-data">
     <input type = "file" name = "file" />
     <select name="target_web" width="100px">
         <option value="cernyrytir">cernyrytir.cz</option>

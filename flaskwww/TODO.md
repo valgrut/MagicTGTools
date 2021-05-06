@@ -1,0 +1,4 @@
+- upravit form
+- upravit menu - About, ...
+- integrovat API
+- pridat args pro CLI pouziti (viz bash verze)

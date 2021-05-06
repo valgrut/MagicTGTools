@@ -13,8 +13,8 @@
 
     <!-- https://stackoverflow.com/questions/40980575/how-to-get-contents-from-a-local-text-file-to-print-on-individual-lines-in-a-htm -->
     <ul>
-    {% for card in deck %}
-        <li><a href="#">{{card}}</a></li>
+    {% for card in card_urls %}
+        <li><a href="{{card[1]}}">{{card[0]}}</a></li>
     {% endfor %}
     </ul>
 
