@@ -11,8 +11,9 @@ import url_generator
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.permanent_session_lifetime = timedelta(days=5)
+# app.config['UPLOAD_FOLDER'] = "/home/mtgtools/mysite/uploaded" #pythonanywhere
 app.config['UPLOAD_FOLDER'] = "./uploaded/"
-app.config['MAX_CONTENT_PATH'] = "10000"
+app.config['MAX_CONTENT_PATH'] = "100000"
 
 
 @app.route("/")
@@ -71,8 +72,10 @@ def upload_input_file():
         flash("Filename:" + f.filename)
 
         secured_filename = secure_filename(f.filename)
+
+        if not os.path.exists(app.config['upload_folder']):
+            os.makedirs(app.config['upload_folder'])
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename))
-        # flash('Deck has been uploaded successfully')
 
         cardurls = url_generator.process_deck(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename), target_web)
         # TODO: process deck and print urls by given options from form (options like target web etc.)
