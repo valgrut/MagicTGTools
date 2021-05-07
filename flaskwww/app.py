@@ -68,13 +68,13 @@ def upload_input_file():
             return render_template('upload.html')
 
         target_web = request.form['target_web']
-        flash(target_web + " is selected")
-        flash("Filename:" + f.filename)
+        # flash(target_web + " is selected")
+        # flash("Filename:" + f.filename)
 
         secured_filename = secure_filename(f.filename)
 
-        if not os.path.exists(app.config['upload_folder']):
-            os.makedirs(app.config['upload_folder'])
+        if not os.path.exists(app.config['UPLOAD_FOLDER']):
+            os.makedirs(app.config['UPLOAD_FOLDER'])
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename))
 
         cardurls = url_generator.process_deck(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename), target_web)
@@ -84,7 +84,7 @@ def upload_input_file():
         if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename)):
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], secured_filename))
 
-        return render_template('uploader.html', filename=f.filename, card_urls=cardurls)
+        return render_template('uploader.html', filename=f.filename, card_urls=cardurls, target_web=target_web)
 
     return render_template('upload.html')
 

@@ -10,15 +10,17 @@
 {% endwith %}
 
 <!-- Maybe: https://stackoverflow.com/questions/32019733/getting-value-from-select-tag-using-flask -->
-<form action = "/uploader" method = "POST" enctype = "multipart/form-data">
-    <input type = "file" name = "file" />
-    <select name="target_web" width="100px">
-        <option value="cernyrytir">cernyrytir.cz</option>
-        <option value="najada">najada.cz</option>
-        <option value="blacklotus">blacklotus.cz</option>
-        <option value="rishada">rishada.cz</option>
-        <option value="mysticshop">mysticshop [not working]</option>
-    </select>
-    <input type = "submit"/>
-</form>
+<div class="info">
+    <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
+        <input type = "file" name = "file" />
+        <select name="target_web" width="100px">
+            <option value="cernyrytir">cernyrytir.cz</option>
+            <option value="najada">najada.cz</option>
+            <option value="blacklotus">blacklotus.cz</option>
+            <option value="rishada">rishada.cz</option>
+            <option value="mysticshop">mysticshop [not working]</option>
+        </select>
+        <input type = "submit"/>
+    </form>
+</div>
 {% endblock %}

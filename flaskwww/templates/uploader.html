@@ -8,14 +8,19 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-
-    <p>{{filename}}</p>
+    
+    <div class="info">
+        <p><b>Soubor:</b> {{filename}}</p>
+        <p><b>Vybrany obchod:</b> {{target_web}}</p>
+    </div>
 
     <!-- https://stackoverflow.com/questions/40980575/how-to-get-contents-from-a-local-text-file-to-print-on-individual-lines-in-a-htm -->
-    <ul>
-    {% for card in card_urls %}
-        <li><a href="{{card[1]}}">{{card[0]}}</a></li>
-    {% endfor %}
-    </ul>
+    <div class="urllinks">
+        <ul>
+        {% for card in card_urls %}
+            <li><a href="{{card[1]}}">{{card[0]}}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}

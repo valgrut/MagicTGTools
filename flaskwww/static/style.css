@@ -1,0 +1,45 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.bodybkg {
+    background-color: #d2ffd1;
+    background: url(waiting-by-grass-eight.-wallpaper_.jpg) no-repeat;
+    aabackground: url(magic-the-gathering.jpg) no-repeat;
+    background-size: cover;
+}
+
+.page {
+    margin: 0 auto;
+    /* padding: 5px; */
+    width: 1000px;
+    border: 3px solid green;
+    height: 100%;
+    background: rgba(210, 255, 209, 0.65)
+}
+
+.info {
+    padding: 10px;
+    border-bottom: 1px solid green;
+}
+
+div.urllinks {
+    aatext-shadow: 1px 1px #616362;
+    font-weight: bold;
+    padding-top: 10px;
+    column-gap: 10px;
+    column-count: 3;
+}
+
+a:visited {
+    color: black;
+}
+
+a:link {
+    color: black;
+}
+
+a:hover {
+    color: #034d16;
+}
