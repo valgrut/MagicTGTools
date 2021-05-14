@@ -2,3 +2,4 @@
 - upravit menu - About, ...
 - integrovat API
 - pridat args pro CLI pouziti (viz bash verze)
+- formular kde napisu primo kartu(karty), pro kterou budu chtit udelat odkaz.
