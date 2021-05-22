@@ -7,3 +7,5 @@
 - [ ] podpora pro mysticshop(https://stackoverflow.com/questions/12385795/shell-connecting-to-a-website-and-accessing-a-field/12387165) a tolarie.cz
 
 - [ ] update README !!!!!!!!
+
+- [] mozna nechat pocet karet v baliku (protoze obcas seznam karet neni nutne deck, a taky jsou std decky, ne jen cmd)
