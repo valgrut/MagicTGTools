@@ -2,7 +2,7 @@
 
 ## 1. Description
 
-![](additional-data/printed-labels.jpg)
+![](additional-data/printed-labels2.jpg)
 
 ## 2. How to use it
 ### 2.1 Run app Locally
