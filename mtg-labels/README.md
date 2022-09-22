@@ -16,7 +16,7 @@ and now open **http://localhost:5000** in your browser.
 Example input: DMU,NCC,NEO,VOC,VOW,TSR,RNA
 
 ### 2.2 Online on my server
-This website will be online on **mtg-labels.wogon.cz** webpage.
+This website will be online on **mtglabels.wogon.cz** webpage.
 
 ### 2.3 In Container
 Build the image:
@@ -49,41 +49,43 @@ docker container prune
 
 
 ### 3.2 [Not recommended] Manually
-<details><summary><b>Zobrazit vice vztahu na hmatniku...</b></summary>
-    <p>
-    Important note 1: Keep an eye on the naming of the files and of the added lines in the code!
-    - 'label\_type' in app.py must match the html form '\<option value='
-    - 'label\_type\_name' in app.py must match template and stylesheet file names
+<details><summary><b>Show manual steps to add new Template</b></summary>
+<p>
+<pre>
+Important note 1: Keep an eye on the naming of the files and of the added lines in the code!
+- 'label\_type' in app.py must match the html form '\<option value='
+- 'label\_type\_name' in app.py must match template and stylesheet file names
 
-    1. Copy and modify your copy of the template file in templates/
-    ```bash
-    cp templates/small-labels-default-template.html templates/NEW-LABEL-OPTION-STYLE-NAME-template.html
-    vim templates/NEW-LABEL-OPTION-STYLE-NAME-template.html
-    ```
+1. Copy and modify your copy of the template file in templates/
+```bash
+cp templates/small-labels-default-template.html templates/NEW-LABEL-OPTION-STYLE-NAME-template.html
+vim templates/NEW-LABEL-OPTION-STYLE-NAME-template.html
+```
 
-    2. Copy and modify your copy of the stylesheet file in static/
-    ```bash
-    cp static/small-labels-default.css static/NEW-LABEL-OPTION-STYLE-NAME.css
-    vim static/NEW-LABEL-OPTION-STYLE-NAME.css
-    ```
+2. Copy and modify your copy of the stylesheet file in static/
+```bash
+cp static/small-labels-default.css static/NEW-LABEL-OPTION-STYLE-NAME.css
+vim static/NEW-LABEL-OPTION-STYLE-NAME.css
+```
 
-    3. Add option into the html form in the 'index.html' file
-    ```html
-    <option value="NEW_LABEL_OPTION_STYLE">New label style name</option>
-    ```
+3. Add option into the html form in the 'index.html' file
+```html
+<option value="NEW_LABEL_OPTION_STYLE">New label style name</option>
+```
 
-    4. Add 'elif' lines into the 'app.py'
-    ```python
-    elif label_type == "NEW_LABEL_OPTION_STYLE_NAME":
-        label_type_name = "NEW-LABEL-OPTION-STYLE-NAME"
-    ```
+4. Add 'elif' lines into the 'app.py'
+```python
+elif label_type == "NEW_LABEL_OPTION_STYLE_NAME":
+    label_type_name = "NEW-LABEL-OPTION-STYLE-NAME"
+```
 
-    Which is passed into the files path later in the code.
-    ```
-        html_label_template = label_type_name+"-template.html"
-        css_label_style = "static/"+label_type_name+".css
-    ```
-    </p>
+Which is passed into the files path later in the code.
+```
+    html_label_template = label_type_name+"-template.html"
+    css_label_style = "static/"+label_type_name+".css
+```
+</pre>
+</p>
 </details>
 
 
