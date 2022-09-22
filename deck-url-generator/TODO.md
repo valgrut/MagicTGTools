@@ -9,3 +9,5 @@
 - [ ] update README !!!!!!!!
 
 - [] mozna nechat pocet karet v baliku (protoze obcas seznam karet neni nutne deck, a taky jsou std decky, ne jen cmd)
+
+- [ ] Pridat podporu pro mezinarodni obchody - cardkingdom, aby to bylo pouzitelne i mezinarodne.

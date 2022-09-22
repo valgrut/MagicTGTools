@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Labels for printer generator{% endblock %}
+{% block label_styles %}static/styles-default.css{% endblock %}
+{% block content %}
+
+Fill the list of shortcuts of such expansions, you want to generate labels for.
+
+Edition shortcuts should be separated by ',' only.
+
+Example: "SNC,VOW,KHM,WAR,GRN"
+
+<form action="/generated-labels" method="POST" enctype="multipart/form-data">
+    <p>List of Expansion shortcuts:</p>
+    <p><input type="text" name="expansions_list" value="NEO,VOW,DMU,NCC" size="100"/></p>
+    <select name="label_type" width="100px">
+        <option value="small_labels_default">Small strip label (default)</option>
+        <option value="small_labels_no_date">Small strip label - no date</option>
+        <option value="large_labels_basic">Large whole card label</option>
+        <option value="large_labels_basic_switched">large-labels-basic-switched</option>
+        <!-- LABEL_TYPE_COMMENT_TO_MATCH_FOR_SCRIPT -->
+    </select>
+    <select name="label_rarity" width="100px">
+        <option value="C">Common</option>
+        <option value="U">Uncommon</option>
+        <option value="R">Rare</option>
+        <option value="M">Mythic</option>
+    </select>
+    <select name="label_background_color" width="100px">
+        <option value="white">No Background (default)</option>
+        <option value="rgb(235,159,130)"><p style="background-color: rgb(235,159,130)">Mountain</p></option>
+        <option value="rgb(196,211,202)"><p style="background-color: rgb(196,211,202)">Forest</p></option>
+        <option value="rgb(248,231,185)"><p style="background-color: rgb(248,231,185)">Plains</p></option>
+        <option value="rgb(166,159,157)"><p style="background-color: rgb(166,159,157)">Swamp</p></option>
+        <option value="rgb(179,206,234)"><p style="background-color: rgb(179,206,234)">Island</p></option>
+    </select>
+    <p><input type="submit" name="submit"/></p>
+</form>
+
+
+<h3>Example</h3>
+<div id="smallLabel" class="outline-small" style="background-color: {{ label_background_color }}">
+    <div id="smallLabel" class="date">
+        {{ EXPANSION_RELEASE_DATE }}
+    </div>
+    <div id="smallLabel" class="expansion">
+        <div id="smallLabel" class="expansionname">
+            {{ EXPANSION_NAME }}
+        </div>
+
+        <div id="smallLabel" class="expansionshortcut">
+            {{ EXPANSION_SHORTCUT }}
+        </div>
+    </div>
+    <div id="smallLabel" class="icon">
+        <img src="{{EXPANSION_ICON}}">
+    </div>
+</div>
+
+{% endblock %}
