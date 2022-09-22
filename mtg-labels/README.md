@@ -2,6 +2,8 @@
 
 ## 1. Description
 
+![](additional-data/printed-labels.jpg)
+
 ## 2. How to use it
 ### 2.1 Run app Locally
 Clone this repository and run server *locally*:
