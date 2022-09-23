@@ -23,12 +23,12 @@ This website will be online on **mtglabels.wogon.cz** webpage.
 ### 2.3 In Container
 Build the image:
 ```
-docker build --tag mtg-labels-docker .
+docker build --tag mtg-labels .
 ```
 
 and run the app in the container:
 ```
-docker run -d -p 5000:5000 mtg-labels-docker
+docker run -d -p 5000:5000 mtg-labels
 ```
 
 Finally cleanup the mess:

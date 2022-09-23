@@ -1,12 +1,13 @@
 # syntax=docker/dockerfile:1
 
-# Build: 'docker build --tag mtg-labels-docker .'
+# Build: 'docker build --tag mtg-labels .'
+
+# ! This must be the first
+FROM python:3.8-slim-buster
 
 MAINTAINER Jiri Peska "xpeskajiri@google.com"
 
-FROM python:3.8-slim-buster
-# https://gist.github.com/573/ae3b2f912116d141d74bd32dac5cda81
-WORKDIR /mtg-labels-docker
+WORKDIR /mtg-labels
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
