@@ -1,6 +1,8 @@
 # Magic The Gathering - Cards Label generator
 
-[![Docker](https://img.shields.io/badge/Docker%20Hub-valgrut/mtg-labels-blue.svg?logo=docker)](https://hub.docker.com/repository/docker/valgrut/mtg-labels)
+<!-- [![Docker](https://img.shields.io/badge/Docker%20Hub-valgrut/mtg-labels-blue.svg?logo=docker)](https://hub.docker.com/repository/docker/valgrut/mtg-labels) -->
+
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/repository/docker/valgrut/mtg-labels)
 
 ## 1. Description
 
@@ -18,7 +20,7 @@ Example input: DMU,NCC,NEO,VOC,VOW,TSR,RNA
 Link: https://hub.docker.com/repository/docker/valgrut/mtg-labels
 
 ### 2.2 Online on my server
-This website will be online on **mtglabels.wogon.cz** webpage.
+This website will be online on [**mtglabels.wogon.cz**](https://mtglabels.wogon.cz) webpage.
 
 ### 2.3 Run app Locally
 Clone this repository and run server *locally*:
@@ -47,6 +49,9 @@ docker ps
 docker stop valgrut/mtg-labels
 docker container prune
 ```
+
+
+If this tool has been useful for you, leave a ⭐ star ⭐ please and come back again for new labels!
 
 
 ## 3. Create your own template
