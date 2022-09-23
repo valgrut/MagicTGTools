@@ -5,7 +5,18 @@
 ![](additional-data/printed-labels2.jpg)
 
 ## 2. How to use it
-### 2.1 Run app Locally
+
+Example input: DMU,NCC,NEO,VOC,VOW,TSR,RNA
+
+### 2.1 Just pull and run the container (Simplest)
+```
+(sudo) docker run -it --rm valgrut/mtg-labels
+```
+
+### 2.2 Online on my server
+This website will be online on **mtglabels.wogon.cz** webpage.
+
+### 2.3 Run app Locally
 Clone this repository and run server *locally*:
 ```
     export FLASK_ENV=development
@@ -15,26 +26,21 @@ Clone this repository and run server *locally*:
 
 and now open **http://localhost:5000** in your browser.
 
-Example input: DMU,NCC,NEO,VOC,VOW,TSR,RNA
-
-### 2.2 Online on my server
-This website will be online on **mtglabels.wogon.cz** webpage.
-
-### 2.3 In Container
+### 2.4 In self-built Container
 Build the image:
 ```
-docker build --tag mtg-labels .
+docker build --tag valgrut/mtg-labels .
 ```
 
 and run the app in the container:
 ```
-docker run -d -p 5000:5000 mtg-labels
+docker run -d -p 5000:5000 valgrut/mtg-labels
 ```
 
 Finally cleanup the mess:
 ```
 docker ps
-docker stop mtg-labels-docker
+docker stop valgrut/mtg-labels
 docker container prune
 ```
 
