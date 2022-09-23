@@ -2,7 +2,7 @@
 
 <!-- [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/valgrut/mtg-labels) -->
 
-[![Docker](https://img.shields.io/badge/Docker%20Hub-valgrut/mtglabels-blue.svg?logo=docker)](https://hub.docker.com/r/valgrut/mtg-labels) ![Maintainer](https://img.shields.io/badge/maintainer-Valgrut-blue) [![Website www.wogon.cz](https://img.shields.io/website-up-down-green-red/https/wogon.cz.svg)](https://mtglabels.wogon.cz)
+[![Docker](https://img.shields.io/badge/Docker%20Hub-valgrut/mtglabels-blue.svg?logo=docker)](https://hub.docker.com/r/valgrut/mtg-labels) ![Maintainer](https://img.shields.io/badge/maintainer-Valgrut-blue) [![Website www.wogon.cz](https://img.shields.io/website-up-green/https/wogon.cz.svg)](https://mtglabels.wogon.cz)
 
 ## 1. Description
 
