@@ -8,10 +8,12 @@
 
 Example input: DMU,NCC,NEO,VOC,VOW,TSR,RNA
 
-### 2.1 Just pull and run the container (Simplest)
+### 2.1 Just pull and run the container from hub.docker.com (simplest)
 ```
 (sudo) docker run -it --rm valgrut/mtg-labels
 ```
+
+Link: https://hub.docker.com/repository/docker/valgrut/mtg-labels
 
 ### 2.2 Online on my server
 This website will be online on **mtglabels.wogon.cz** webpage.
@@ -54,6 +56,8 @@ docker container prune
 ```
 
 2. Now just edit generated template and stylesheet and enjoy new label!
+
+3. Optional: Create a merge request to extend the template pool for others!
 
 
 ### 3.2 [Not recommended] Manually
@@ -104,7 +108,14 @@ Which is passed into the files path later in the code.
 
 
 ## 5. Tool Development - Convert excell table to csv file
+- Convert excell ods file into csv for future processing
 ```
 soffice --convert-to csv --outdir /tmp/ sets-list.ods
 libreoffice --convert-to csv --outdir /tmp/ sets-list.ods
 ```
+
+- Push updated docker image into dockerhub
+```
+docker push valgrut/mtg-labels
+```
+
