@@ -8,6 +8,17 @@
 
 ![](additional-data/printed-labels2.jpg)
 
+---
+
+|  Small Label - Default  |  Small Label - Default - Rare  |  Small Label - no date - swamp  |
+:-------------------------:|:-------------------------:|:-------------------------:
+![small default](additional-data/example1.png)  |  ![](additional-data/example2.png) | ![](additional-data/example4.png)
+![](additional-data/example2.png)  |  ![](additional-data/example4.png) | ![](additional-data/example3.png)
+
+|  Large Label - Default  |  Large Label - Switched  |  
+:-------------------------:|:-------------------------:
+![small default](additional-data/example1.png)  |  ![](additional-data/example2.png)
+
 ## 2. How to use it
 
 Example input: DMU,NCC,NEO,VOC,VOW,TSR,RNA
