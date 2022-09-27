@@ -8,16 +8,19 @@
 
 ![](additional-data/printed-labels2.jpg)
 
----
+## Available Label Examples:
 
-|  Small Label - Default  |  Small Label - Default - Rare  |  Small Label - no date - swamp  |
+|  Small Label (Default) - Common | Small Label (Default) - Uncommon  |  Small Label (Default) - Mountain + Rare  |
 :-------------------------:|:-------------------------:|:-------------------------:
-![small default](additional-data/example1.png)  |  ![](additional-data/example2.png) | ![](additional-data/example4.png)
-![](additional-data/example2.png)  |  ![](additional-data/example4.png) | ![](additional-data/example3.png)
+![](additional-data/labels-c.png)  |  ![](additional-data/labels-u.png) | ![](additional-data/labels-mr.png)
 
-|  Large Label - Default  |  Large Label - Switched  |  
-:-------------------------:|:-------------------------:
-![small default](additional-data/example1.png)  |  ![](additional-data/example2.png)
+|  Small Label (No-date) - Common | Small Label (No-date) - Forest + Uncommon  |  Small Label (No-date) - Swamp + Mythic |
+:-------------------------:|:-------------------------:|:-------------------------:
+![](additional-data/labels-no-c.png)  |  ![](additional-data/labels-fu.png) | ![](additional-data/labels-sm.png)
+
+|  Large Label (Default) - Common |  Large Label (Switched) - Rare  | Large Label (Switched) - Mythic |
+:-------------------------:|:-------------------------:|:------------------------------------:
+![](additional-data/labels-large-c.png)  |  ![](additional-data/labels-large-sw-r.png) | ![](additional-data/labels-large-sw-m.png)
 
 ## 2. How to use it
 
