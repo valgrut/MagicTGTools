@@ -9,7 +9,7 @@
 - [~] Zabranit moznosti odeslat dotaz, kdyz je formular prazdnej.
 
 # README.md
-- [ ] Pridat screenshoty finalnich labelu na git do README.md
+- [x] Pridat screenshoty finalnich labelu na git do README.md
 - [ ] Na Git do README.md dat fotku setridenych karet v poradacich pomoci techto mych labelu.
 - [ ] Pridat odkaz na muj ucet a penezenku pro pripadny donate, komu se to bude hodit.
 

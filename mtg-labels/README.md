@@ -140,3 +140,9 @@ libreoffice --convert-to csv --outdir /tmp/ sets-list.ods
 docker push valgrut/mtg-labels
 ```
 
+- README.md live preview
+```
+pipx run grip
+```
+
+There is limit 60 requests/hour. This will be solved with [offline renderer](https://github.com/joeyespo/grip/issues/35) someday.
