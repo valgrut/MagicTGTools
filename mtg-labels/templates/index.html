@@ -1,59 +1,111 @@
 {% extends "base.html" %}
 {% block title %}Labels for printer generator{% endblock %}
-{% block label_styles %}static/styles-default.css{% endblock %}
+{% block label_styles %}static/main-page.css{% endblock %}
 {% block content %}
 
-Fill the list of shortcuts of such expansions, you want to generate labels for.
+<div class="container">
 
-Edition shortcuts should be separated by ',' only.
+<h2>Magic The Gathering - Label generator</h2>
 
-Example: "SNC,VOW,KHM,WAR,GRN"
+<p>
+1. Fill the list of shortcuts of such expansions, you want to generate labels for.
+</p>
 
+<p>
+2. Select desired options, background, rarity, ...
+</p>
+
+<p>
+3. Hit Generate and wait!
+</p>
+
+
+<h3>Input Examples</h3>
+<ul>
+    <li>SNC,VOW,KHM,WAR,GRN</li>
+    <li>khm, vow, mid, znr, afr, afr, iko</li>
+    <li>thb,  WAR,RNA,Grn, dom , iKo,snc</li>
+</ul>
+
+<center>
+<p>
+Please, be patient - it is slow because the app must download selected expansion symbols.
+</p>
+</center>
+
+<table>
 <form action="/generated-labels" method="POST" enctype="multipart/form-data">
-    <p>List of Expansion shortcuts:</p>
-    <p><input type="text" name="expansions_list" value="NEO,VOW,DMU,NCC" size="100"/></p>
-    <select name="label_type" width="100px">
-        <option value="small_labels_default">Small strip label (default)</option>
-        <option value="small_labels_no_date">Small strip label - no date</option>
-        <option value="large_labels_basic">Large whole card label</option>
-        <option value="large_labels_basic_switched">large-labels-basic-switched</option>
-        <!-- LABEL_TYPE_COMMENT_TO_MATCH_FOR_SCRIPT -->
-    </select>
-    <select name="label_rarity" width="100px">
-        <option value="C">Common</option>
-        <option value="U">Uncommon</option>
-        <option value="R">Rare</option>
-        <option value="M">Mythic</option>
-    </select>
-    <select name="label_background_color" width="100px">
-        <option value="white">No Background (default)</option>
-        <option value="rgb(235,159,130)"><p style="background-color: rgb(235,159,130)">Mountain</p></option>
-        <option value="rgb(196,211,202)"><p style="background-color: rgb(196,211,202)">Forest</p></option>
-        <option value="rgb(248,231,185)"><p style="background-color: rgb(248,231,185)">Plains</p></option>
-        <option value="rgb(166,159,157)"><p style="background-color: rgb(166,159,157)">Swamp</p></option>
-        <option value="rgb(179,206,234)"><p style="background-color: rgb(179,206,234)">Island</p></option>
-    </select>
-    <p><input type="submit" name="submit"/></p>
+    <tr>
+        <th>List of Expansion shortcuts:</th>
+        <td>
+            <!-- <input type="text" class="symbols" name="expansions_list" value="NEO,VOW,DMU,NCC" size="100"/> -->
+            <textarea name="expansions_list" class="symbols" rows="5">NEO, VOW, DMU, NCC, ...</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            Select Label Type:
+        </th>
+        <td>
+            <select name="label_type" width="100px">
+                <option value="small_labels_default">Small strip label (default)</option>
+                <option value="small_labels_no_date">Small strip label - no date</option>
+                <option value="large_labels_basic">Large whole card label</option>
+                <option value="large_labels_basic_switched">large-labels-basic-switched</option>
+                <!-- LABEL_TYPE_COMMENT_TO_MATCH_FOR_SCRIPT -->
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            Select Rarity:
+        </th>
+        <td>
+            <select name="label_rarity" width="100px">
+                <option value="C" style="color: black;">Common</option>
+                <option value="U" style="color: #2596be;">Uncommon</option>
+                <option value="R" style="color: gold;">Rare</option>
+                <option value="M" style="color: orange;">Mythic</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Select Background Color:
+        </th>
+        <td>
+            <select name="label_background_color">
+                <option value="white">No Background (default)</option>
+                <option style="background-color: rgb(235,159,130)" value="rgb(235,159,130)">Mountain</option>
+                <option style="background-color: rgb(196,211,202)" value="rgb(196,211,202)">Forest</option>
+                <option style="background-color: rgb(248,231,185)" value="rgb(248,231,185)">Plains</option>
+                <option style="background-color: rgb(166,159,157)" value="rgb(166,159,157)">Swamp</option>
+                <option style="background-color: rgb(179,206,234)" value="rgb(179,206,234)">Island</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <!-- <center> -->
+                <input type="submit" class="submit" name="submit" value="Generate Labels!"/>
+            <!-- </center> -->
+        </td>
+    </tr>
 </form>
+</table>
 
 
-<h3>Example</h3>
-<div id="smallLabel" class="outline-small" style="background-color: {{ label_background_color }}">
-    <div id="smallLabel" class="date">
-        {{ EXPANSION_RELEASE_DATE }}
-    </div>
-    <div id="smallLabel" class="expansion">
-        <div id="smallLabel" class="expansionname">
-            {{ EXPANSION_NAME }}
-        </div>
+<h3>Labels Examples</h3>
+<div class="flex-container">
+    <img src="static/examples/example1.png">
+    <img src="static/examples/example2.png">
+    <img src="static/examples/example3.png">
+    <img src="static/examples/example4.png">
+    <img src="static/examples/example5.png">
+</div>
 
-        <div id="smallLabel" class="expansionshortcut">
-            {{ EXPANSION_SHORTCUT }}
-        </div>
-    </div>
-    <div id="smallLabel" class="icon">
-        <img src="{{EXPANSION_ICON}}">
-    </div>
 </div>
 
 {% endblock %}

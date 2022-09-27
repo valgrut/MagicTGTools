@@ -1,0 +1,72 @@
+body {
+    font-family: "Times New Roman";
+    font-size: 17px;
+    background: url("page-background.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+div.container {
+    border: 2px solid black;
+    background-color: rgba(230, 238, 252, 0.5);
+    min-width: 800px;
+    width: 800px;
+    min-height: 600px;
+    margin: auto;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    width: 30%;
+}
+
+th, td {
+    border: 1px solid #1f7d05;
+    background-color: rgba(10, 25, 40, 0.3);
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+td select {
+    width: 250px;
+}
+
+/* td select option:hover { */
+    /* border: 1px solid black; */
+    /* box-shadow: 0 0 10px 10px gray inset; */
+/* } */
+
+td textarea.symbols {
+    min-width: 98%;
+    color: #B0B0B0;
+}
+
+td input.submit {
+    height: 40px;
+    width: 100%;
+    background-color: rgba(37, 150, 190, 0.5);
+    font-size: 18px;
+    border: 0px;
+}
+
+td input.submit:hover {
+    background-color: #b9c26e;
+    font-size: 20px;
+}
+
+div.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: space-around;
+    width: 100%;
+    row-gap: 15px;
+}
+
+div.flex-container img {
+    display: block;
+}
