@@ -137,6 +137,7 @@ libreoffice --convert-to csv --outdir /tmp/ sets-list.ods
 
 - Push updated docker image into dockerhub
 ```
+docker login
 docker push valgrut/mtg-labels
 ```
 

@@ -10,7 +10,7 @@
 - [x] Pridat screenshoty finalnich labelu na git do README.md
 - [ ] Na Git do README.md dat fotku setridenych karet v poradacich pomoci techto mych labelu.
 - [ ] Pridat odkaz na muj ucet a penezenku pro pripadny donate, komu se to bude hodit.
-- [ ] Lepe oriznout example.png obrazky na titulni strance.
+- [x] Lepe oriznout example.png obrazky na titulni strance.
 - [ ] Presunout obrazky, co jsou na webu jako ukazka v tabulce, do static/examples/ a upravit podle toho .dockerignore
 
 # New Options
