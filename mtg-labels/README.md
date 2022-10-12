@@ -127,6 +127,12 @@ Which is passed into the files path later in the code.
 - [Sticker Printer Paper](https://www.amazon.com/dp/B06XZS3L5F/)
 - [Card House Storage Box for 12x800 cards](https://www.amazon.com/Card-House-Storage-Box-800-Count/dp/B01M3YVUDR/ref=sr_1_14?crid=3PQKODNJAT4SL&keywords=BCW+Tall+Trading+Card+Dividers+-+50+ct&qid=1663061447&sprefix=bcw+tall+trading+card+dividers+-+50+ct+%2Caps%2C290&sr=8-14)
 
+### 4.1. 3D printed card Dividers
+- [Thingiverse: Trading Card Divider](https://www.thingiverse.com/thing:2952669)
+- [Thingiverse: Simple Card Divider](https://www.thingiverse.com/thing:2103998)
+- [Thingiverse: MTG card divider](https://www.thingiverse.com/thing:644763)
+- [Thingiverse: MTG card divider (colorless)](https://www.thingiverse.com/thing:3553237)
+
 
 ## 5. Tool Development - Convert excell table to csv file
 - Convert excell ods file into csv for future processing
