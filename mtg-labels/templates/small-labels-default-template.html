@@ -6,7 +6,8 @@
 <div id="flex-container">
     {% for label_data in info_about_selected_labels %}
         <!-- TEMPLATE -->
-        <div id="label" class="outline-small" style="background-color: {{ label_background_color }};">
+        <div id="label" class="outline-small">
+        <div id="label" class="background" style="background-color: {{ label_background_color }};">
             <div id="label" class="expansion">
                 <div id="label" class="date">
                     {{ label_data[2] }}
@@ -22,6 +23,7 @@
                 <!-- <img src="{{url_for('static', filename=label_data[3])}}"> -->
                 <img src="{{ label_data[3] }}">
             </div>
+        </div> <!-- End of background class -->
         </div>
     {% endfor %}
 </div>

@@ -25,11 +25,14 @@ div#label {
 div#label.outline-small {
     border: 1px solid black;
     /* border-radius: 5px; */
-    /* background-image: url("mramor.jpg"); */
-    /* background-position: center; */
-    /* background-size: cover; */
+    background-image: url("mramor.jpg");
     width: 6cm;
     height: 1cm;
+}
+
+div#label.background {
+    width: 100%;
+    height: 100%;
 }
 
 div#label.expansion {
