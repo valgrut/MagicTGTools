@@ -22,7 +22,7 @@
 # Technology
 - [ ] Jak udelat, aby se Large labely, vlastne jakekoli, nerozpulily mezi 2 ruzne A4 strany.
 - [ ] pohrat si s 'border-radius: 25px;' a zkusit, jak by to vypadalo. Pripadne pridat option do formulare.
-- [ ] Moct vygenerovat jednu sadu labelu odevseho - vsechny rarity, vsechny barvy ale vse 1x pro jednu danou sadu (expanzi).
+- [x] Moct vygenerovat jednu sadu labelu odevseho - vsechny rarity, vsechny barvy ale vse 1x pro jednu danou sadu (expanzi).
 
 # Testing
 - [ ] **Otestovat na FF, Chrome, Edge, Opera.**
