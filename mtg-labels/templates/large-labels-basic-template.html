@@ -5,19 +5,21 @@
 
 <div id="flex-container">
     {% for label_data in info_about_selected_labels %}
-        <!-- TEMPLATE -->
-        <div id="label" class="outline-small" style="background-color: {{ label_background_color }};">
-            <div id="label" class="date">
-                {{ label_data[2] }}
+        {% for label_background_color in label_background_colors %}
+            <!-- TEMPLATE -->
+            <div id="label" class="outline-small" style="background-color: {{ label_background_color }};">
+                <div id="label" class="date">
+                    {{ label_data[2] }}
+                </div>
+                <div id="label" class="expansionname">
+                    {{ label_data[1] }}
+                </div>
+                <div id="label" class="icon">
+                    <!-- <img src="{{url_for('static', filename=label_data[3])}}"> -->
+                    <img src="{{ label_data[3] }}">
+                </div>
             </div>
-            <div id="label" class="expansionname">
-                {{ label_data[1] }}
-            </div>
-            <div id="label" class="icon">
-                <!-- <img src="{{url_for('static', filename=label_data[3])}}"> -->
-                <img src="{{ label_data[3] }}">
-            </div>
-        </div>
+        {% endfor %}
     {% endfor %}
 </div>
 

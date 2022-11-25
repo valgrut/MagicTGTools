@@ -25,8 +25,8 @@ def generate_labels():
     if request.method == 'POST':
         list_of_expansions = request.form['expansions_list']
         label_type = request.form['label_type']
-        label_rarity = request.form['label_rarity']
-        label_background_color = request.form['label_background_color']
+        selected_label_rarities = request.form.getlist('label_rarity')  # TODO: Check that at least one option is checked.
+        label_background_colors = request.form.getlist('label_background_color')  # TODO: Check that at least one option is checked.
         symbol_size = "large"  #large, medium, small
 
         # Validate provided expansions shortcuts and to prevent hacking, xss, ...
@@ -44,24 +44,25 @@ def generate_labels():
 
         set_info_list = []
         for expansion in split_list_of_expansions:
-            expansion_info = []
-            #read csv, and split on "," the line
-            csv_file = csv.reader(open('sets-list.csv', "r"), delimiter=";")
+            for label_rarity in selected_label_rarities:
+                expansion_info = []
+                #read csv, and split on "," the line
+                csv_file = csv.reader(open('sets-list.csv', "r"), delimiter=";")
 
-            # Get informations based on the expansion shortcut
-            for row in csv_file:
-                expansion = expansion.upper()
-                if expansion == row[0]:
-                    set_shortcut = row[0]
-                    expansion_info.append(row[0])  # Shortcut
-                    expansion_info.append(row[1])  # Full Edition name
-                    formatted_date = datetime.datetime.strptime(row[2], '%d.%m.%Y').strftime('%Y-%m')
-                    expansion_info.append(formatted_date)  # Release date
-                    # expansion_info.append(row[2])  # Release date
-                    expansion_info.append("static/expansion-symbols/"+row[0]+"-"+label_rarity+".png")  # Release date
-                    if not exists("static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png"):
-                        response = wget.download("https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set="+set_shortcut+"&size="+symbol_size+"&rarity="+label_rarity, "static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png")
-                    set_info_list.append(expansion_info)
+                # Get informations based on the expansion shortcut
+                for row in csv_file:
+                    expansion = expansion.upper()
+                    if expansion == row[0]:
+                        set_shortcut = row[0]
+                        expansion_info.append(row[0])  # Shortcut
+                        expansion_info.append(row[1])  # Full Edition name
+                        formatted_date = datetime.datetime.strptime(row[2], '%d.%m.%Y').strftime('%Y-%m')
+                        expansion_info.append(formatted_date)  # Release date
+                        # expansion_info.append(row[2])  # Release date
+                        expansion_info.append("static/expansion-symbols/"+row[0]+"-"+label_rarity+".png")  # Release date
+                        if not exists("static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png"):
+                            response = wget.download("https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set="+set_shortcut+"&size="+symbol_size+"&rarity="+label_rarity, "static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png")
+                        set_info_list.append(expansion_info)
 
         # Selecting correct html template and css stylesheet files
         label_type_name = "small-labels-default"
@@ -89,7 +90,7 @@ def generate_labels():
         return render_template(html_label_template, \
                 info_about_selected_labels=set_info_list, \
                 label_type=label_type, \
-                label_background_color=label_background_color, \
+                label_background_colors=label_background_colors, \
                 label_css_style=css_label_style \
                 )
 
