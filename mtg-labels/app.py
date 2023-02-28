@@ -34,9 +34,11 @@ def generate_labels():
 
         # Remove any whitespaces from input
         list_of_expansions = list_of_expansions.replace(" ", "")
-        split_list_of_expansions = list_of_expansions.split(',')
+        raw_split_list_of_expansions = list_of_expansions.split(',')
 
         # print(f"Number of items is zero. {len(split_list_of_expansions)}")
+        # print(raw_split_list_of_expansions)
+        split_list_of_expansions = [expansion.strip() for expansion in raw_split_list_of_expansions]
         # print(split_list_of_expansions)
         # if len(split_list_of_expansions) == 0:
         #     print(f"Number of items is zero. {len(split_list_of_expansions)}")
