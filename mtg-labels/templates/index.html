@@ -8,15 +8,15 @@
 <h2>Magic The Gathering - Label generator</h2>
 
 <p>
-1. Fill the list of shortcuts of such expansions, you want to generate labels for.
+    <b>1.</b> Fill the list of shortcuts of such expansions, you want to generate labels for.
 </p>
 
 <p>
-2. Select desired options, background, rarity, ...
+    <b>2.</b> Select desired options, background, rarity, ...
 </p>
 
 <p>
-3. Hit Generate and wait!
+    <b>3.</b> Hit Generate and wait!
 </p>
 
 
@@ -25,6 +25,7 @@
     <li>SNC,VOW,KHM,WAR,GRN</li>
     <li>khm, vow, mid, znr, afr, afr, iko</li>
     <li>thb,  WAR,RNA,Grn, dom , iKo,snc</li>
+    <li><b>Latest sets</b>: {{ PREFILED_SETS }}</li>
 </ul>
 
 <center>
@@ -95,7 +96,6 @@
 </form>
 </table>
 
-
 <h3>Labels Examples</h3>
 <div class="flex-container">
     <img src="static/examples/example1.png">
@@ -105,6 +105,11 @@
     <img src="static/examples/example5.png">
 </div>
 
-</div>
+<h3>Known issues</h3>
+<p>
+- Not all set symbols exist on the page, from which those set images are downloaded
+</p>
 
+
+</div>
 {% endblock %}

@@ -17,7 +17,20 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 @app.route('/')
 def home():
-    return render_template('index.html', EXPANSION_RELEASE_DATE='13.2.2022', EXPANSION_NAME='Innistrad: Crimson Vow', EXPANSION_SHORTCUT='VOW', EXPANSION_ICON='static/expansion-symbols/VOW-C.png')
+    # fetch first 6 sets shortcuts from csv file
+    prefiled_sets = ""
+    csv_file = csv.reader(open('sets-list.csv', "r"), delimiter=";")
+    max_row = 5
+    current_row = 0
+    for row in csv_file:
+        prefiled_sets += row[0]
+        if current_row >= max_row:
+            break
+        prefiled_sets += ","
+        current_row += 1
+    # print(prefiled_sets)
+
+    return render_template('index.html', PREFILED_SETS=prefiled_sets)
 
 
 @app.route('/generated-labels', methods = ['GET', 'POST'])
@@ -36,19 +49,14 @@ def generate_labels():
         list_of_expansions = list_of_expansions.replace(" ", "")
         raw_split_list_of_expansions = list_of_expansions.split(',')
 
-        # print(f"Number of items is zero. {len(split_list_of_expansions)}")
         # print(raw_split_list_of_expansions)
         split_list_of_expansions = [expansion.strip() for expansion in raw_split_list_of_expansions]
         # print(split_list_of_expansions)
-        # if len(split_list_of_expansions) == 0:
-        #     print(f"Number of items is zero. {len(split_list_of_expansions)}")
-        #     return render_template('index.html', EXPANSION_RELEASE_DATE='13.2.2022', EXPANSION_NAME='Innistrad: Crimson Vow', EXPANSION_SHORTCUT='VOW', EXPANSION_ICON='static/expansion-symbols/VOW-C.png')
 
         set_info_list = []
         for expansion in split_list_of_expansions:
             for label_rarity in selected_label_rarities:
                 expansion_info = []
-                #read csv, and split on "," the line
                 csv_file = csv.reader(open('sets-list.csv', "r"), delimiter=";")
 
                 # Get informations based on the expansion shortcut
@@ -60,7 +68,6 @@ def generate_labels():
                         expansion_info.append(row[1])  # Full Edition name
                         formatted_date = datetime.datetime.strptime(row[2], '%d.%m.%Y').strftime('%Y-%m')
                         expansion_info.append(formatted_date)  # Release date
-                        # expansion_info.append(row[2])  # Release date
                         expansion_info.append("static/expansion-symbols/"+row[0]+"-"+label_rarity+".png")  # Release date
                         if not exists("static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png"):
                             response = wget.download("https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set="+set_shortcut+"&size="+symbol_size+"&rarity="+label_rarity, "static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png")
