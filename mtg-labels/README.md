@@ -22,6 +22,12 @@
 :-------------------------:|:-------------------------:|:------------------------------------:
 ![](additional-data/labels-large-c.png)  |  ![](additional-data/labels-large-sw-r.png) | ![](additional-data/labels-large-sw-m.png)
 
+## Recommended print settings
+* Ctrl + P to print into PDF or print directly.
+* Scale: 100% (instead of "fit to page width")
+* Margins: None
+* Print backgrounds ON
+
 ## 2. How to use it
 
 Example input: DMU,NCC,NEO,VOC,VOW,TSR,RNA

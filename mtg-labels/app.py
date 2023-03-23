@@ -18,19 +18,19 @@ ssl._create_default_https_context = ssl._create_unverified_context
 @app.route('/')
 def home():
     # fetch first 6 sets shortcuts from csv file
-    prefiled_sets = ""
+    prefilled_sets = ""
     csv_file = csv.reader(open('sets-list.csv', "r"), delimiter=";")
     max_row = 5
     current_row = 0
     for row in csv_file:
-        prefiled_sets += row[0]
+        prefilled_sets += row[0]
         if current_row >= max_row:
             break
-        prefiled_sets += ","
+        prefilled_sets += ","
         current_row += 1
-    # print(prefiled_sets)
+    # print(prefilled_sets)
 
-    return render_template('index.html', PREFILED_SETS=prefiled_sets)
+    return render_template('index.html', PREFILLED_SETS=prefilled_sets)
 
 
 @app.route('/generated-labels', methods = ['GET', 'POST'])
@@ -59,7 +59,7 @@ def generate_labels():
                 expansion_info = []
                 csv_file = csv.reader(open('sets-list.csv', "r"), delimiter=";")
 
-                # Get informations based on the expansion shortcut
+                # Get information based on the expansion shortcut
                 for row in csv_file:
                     expansion = expansion.upper()
                     if expansion == row[0]:
