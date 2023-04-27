@@ -79,6 +79,8 @@ def generate_labels():
                                 print(f"Error: Set symbol image for {set_shortcut} does not exist on source page.")
                                 # Remove zero-size image
                                 os.remove(dst_expansion_path)
+                                
+                                # TODO: Try to fetch image from other source?
 
                         set_info_list.append(expansion_info)
 
