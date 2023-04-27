@@ -7,6 +7,7 @@ import ssl
 import urllib
 import urllib.request
 import datetime
+import os
 
 # https://aetherhub.com/Card/Set
 # https://mythicspoiler.com/sets.html   !!!!
@@ -38,8 +39,8 @@ def generate_labels():
     if request.method == 'POST':
         list_of_expansions = request.form['expansions_list']
         label_type = request.form['label_type']
-        selected_label_rarities = request.form.getlist('label_rarity')  # TODO: Check that at least one option is checked.
-        label_background_colors = request.form.getlist('label_background_color')  # TODO: Check that at least one option is checked.
+        selected_label_rarities = request.form.getlist('label_rarity')
+        label_background_colors = request.form.getlist('label_background_color')
         symbol_size = "large"  #large, medium, small
 
         # Validate provided expansions shortcuts and to prevent hacking, xss, ...
@@ -70,7 +71,15 @@ def generate_labels():
                         expansion_info.append(formatted_date)  # Release date
                         expansion_info.append("static/expansion-symbols/"+row[0]+"-"+label_rarity+".png")  # Release date
                         if not exists("static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png"):
-                            response = wget.download("https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set="+set_shortcut+"&size="+symbol_size+"&rarity="+label_rarity, "static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png")
+                            src_expansion_link = "https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set="+set_shortcut+"&size="+symbol_size+"&rarity="+label_rarity
+                            dst_expansion_path = "static/expansion-symbols/"+set_shortcut+"-"+label_rarity+".png"
+                            response = wget.download(src_expansion_link, dst_expansion_path)
+
+                            if os.stat(dst_expansion_path).st_size == 0:
+                                print(f"Error: Set symbol image for {set_shortcut} does not exist on source page.")
+                                # Remove zero-size image
+                                os.remove(dst_expansion_path)
+
                         set_info_list.append(expansion_info)
 
         # Selecting correct html template and css stylesheet files
@@ -94,7 +103,6 @@ def generate_labels():
         # Select correct html template and css style file
         html_label_template = label_type_name+"-template.html"
         css_label_style = "static/"+label_type_name+".css"
-
 
         return render_template(html_label_template, \
                 info_about_selected_labels=set_info_list, \
