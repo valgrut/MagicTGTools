@@ -100,6 +100,9 @@ def generate_labels():
 
         elif label_type == "large_labels_basic_switched":
             label_type_name = "large-labels-basic-switched"
+
+        elif label_type == "narrow_labels_template":
+            label_type_name = "narrow-labels-template"
         # LABEL_TYPE_COMMENT_TO_MATCH_FOR_SCRIPT
 
         # Select correct html template and css style file
