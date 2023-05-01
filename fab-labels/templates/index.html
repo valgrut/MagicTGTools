@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Labels for printer generator{% endblock %}
+{% block label_styles %}static/main-page.css{% endblock %}
+{% block content %}
+
+<div class="container">
+
+<h2>Magic The Gathering - Label generator</h2>
+
+<p>
+    <b>1.</b> Fill the list of shortcuts of such expansions, you want to generate labels for.
+</p>
+
+<p>
+    <b>2.</b> Select desired options, background, rarity, ...
+</p>
+
+<p>
+    <b>3.</b> Hit Generate and wait!
+</p>
+
+
+<h3>Input Examples</h3>
+<ul>
+    <li>SNC,VOW,KHM,WAR,GRN</li>
+    <li>khm, vow, mid, znr, afr, afr, iko</li>
+    <li>thb,  WAR,RNA,Grn, dom , iKo,snc</li>
+    <li><b>Latest sets</b>: {{ PREFILLED_SETS }}</li>
+</ul>
+
+<center>
+    <p>
+        <b>Please, be patient - it is slow because the app must download those <br> selected expansion symbols, which were not downloaded yet.</b>
+    </p>
+</center>
+
+<table>
+<form action="/generated-labels" method="POST" enctype="multipart/form-data">
+    <tr>
+        <th>
+            List of Expansion shortcut(s):
+        </th>
+        <td>
+            <textarea name="expansions_list" class="symbols" rows="5">NEO, VOW, DMU, NCC, ...</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            Select Label Type:
+        </th>
+        <td>
+            <select name="label_type" width="100px">
+                <option value="small_labels_default">Small strip label (default)</option>
+                <option value="small_labels_no_date">Small strip label - no date</option>
+                <option value="large_labels_basic">Large whole card label</option>
+                <option value="large_labels_basic_switched">large-labels-basic-switched</option>
+        <option value="narrow_labels_template">narrow-labels-template</option>
+                <!-- LABEL_TYPE_COMMENT_TO_MATCH_FOR_SCRIPT -->
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <th>
+            Select Rarity(ies)
+        </th>
+        <td>
+            <fieldset>
+                <input type="checkbox" name="label_rarity" value="C" checked>Common<br>
+                <input type="checkbox" name="label_rarity" value="U">Uncommon<br>
+                <input type="checkbox" name="label_rarity" value="R">Rare<br>
+                <input type="checkbox" name="label_rarity" value="M">Mythic<br>
+            </fieldset>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Select Background Color(s):
+        </th>
+        <td>
+            <fieldset>
+                <input type="checkbox" name="label_background_color" value="white" checked>No Background (White)<br>
+                <input type="checkbox" name="label_background_color" style="background-color: rgb(235,159,130)" value="rgb(235,159,130)">Mountain<br>
+                <input type="checkbox" name="label_background_color" style="background-color: rgb(196,211,202)" value="rgb(196,211,202)">Forest<br>
+                <input type="checkbox" name="label_background_color" style="background-color: rgb(248,231,185)" value="rgb(248,231,185)">Plains<br>
+                <input type="checkbox" name="label_background_color" style="background-color: rgb(166,159,157)" value="rgb(166,159,157)">Swamp<br>
+                <input type="checkbox" name="label_background_color" style="background-color: rgb(179,206,234)" value="rgb(179,206,234)">Island<br>
+            </fieldset>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" class="submit" name="submit" value="Generate Labels!"/>
+        </td>
+    </tr>
+</form>
+</table>
+
+<h3>Labels Examples</h3>
+<div class="flex-container">
+    <img src="static/examples/example1.png">
+    <img src="static/examples/example2.png">
+    <img src="static/examples/example3.png">
+    <img src="static/examples/example4.png">
+    <img src="static/examples/example5.png">
+</div>
+
+<h3>Known issues</h3>
+<ul>
+    <li>Not all set symbols exist on the page, from which those set images are downloaded</li>
+    <li>When generating too many labels, some overflow the A4 format and are split in half</li>
+</ul>
+</p>
+
+
+<div class="footer">
+    Source code available on my <a href="https://github.com/valgrut/MagicTGTools/tree/main/mtg-labels">github</a>.
+</div>
+
+</div>
+{% endblock %}
