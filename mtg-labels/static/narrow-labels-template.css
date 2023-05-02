@@ -29,7 +29,7 @@ div#label.outline-small {
     /* background-position: center; */
     /* background-size: cover; */
     width: 6cm;
-    height: 1cm;
+    height: 0.7cm;
 }
 
 div#label.expansion {
@@ -42,9 +42,9 @@ div#label.date {
     /* border: 1px solid yellow; */
     /* background-color: yellow; */
     width: 100%;
-    height: 0.35cm;
+    height: 0.25cm;
     float: left;
-    font-size: 10px;
+    font-size: 9px;
     text-align: center;
     padding-top: 2px;
 }
@@ -53,7 +53,7 @@ div#label.expansionshortcut {
     /* border: 1px solid red; */
     /* background-color: red; */
     width: 100%;
-    height: 0.65cm;
+    height: 0.45cm;
     float: left;
     text-align: center;
     font-size: 9px;
@@ -67,7 +67,7 @@ div#label.expansionname {
     width: 3.6cm;
     height: 100%;
     float: left;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 
