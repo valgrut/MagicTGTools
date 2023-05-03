@@ -1,12 +1,4 @@
-# ON PC:
-#   Modify SRC v /Repositories/mtg-labels
-#   Commit and Push to Git
-# ON SERVER: 
-#   rm -rf mtg-labels
-#   git pull
-#   docker BUILD
-#   docker PUSH
-#   docker-compose RESTART mtg-labels
+# How to Update the live Docker container on Server
 
 # 1. On server:
 rm -rf /home/picluster/Configs/mtg-labels/*
@@ -15,10 +7,11 @@ sudo docker image rm mtglabels
 
 # 2. On PC:
 scp mtg-labels picluster@192.168.88.245:/home/picluster/Configs/mtg-labels
+##TODO: Why? I can just pull the new version of Repository...
 
 # 3. On Server
 sudo docker login
 sudo docker build --tag valgrut/latest .
-sudo docker push valgrut/latest
+sudo docker push valgrut/mtg-labels
 sudo docker-compose up -d mtglabels
 
