@@ -18,7 +18,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 @app.route('/')
 def home():
-    # fetch first 6 sets shortcuts from csv file
+    # fetch first 6 set shortcuts from csv file
     prefilled_sets = ""
     csv_file = csv.reader(open('sets-list.csv', "r"), delimiter=";")
     max_row = 5
@@ -63,6 +63,9 @@ def generate_labels():
                 # Get information based on the expansion shortcut
                 for row in csv_file:
                     expansion = expansion.upper()
+                    set_shortcut = row[0]
+                    set_name = row[1]
+                    set_release_date = row[2]
                     if expansion == row[0]:
                         set_shortcut = row[0]
                         expansion_info.append(row[0])  # Shortcut
@@ -79,7 +82,7 @@ def generate_labels():
                                 print(f"Error: Set symbol image for {set_shortcut} does not exist on source page.")
                                 # Remove zero-size image
                                 os.remove(dst_expansion_path)
-                                
+
                                 # TODO: Try to fetch image from other source?
 
                         set_info_list.append(expansion_info)
