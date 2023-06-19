@@ -1,32 +1,32 @@
-- [x] assassin
-- [x] brute
-- [x] draconic-illusionist
-- [x] draconic-ninja
-- [x] earth
-- [x] elemental-guardian
-- [x] elemental
-- [x] elemental-ranger
-- [x] elemental-runeblade
-- [x] elemental-wizard
-- [x] equipment-chest
-- [x] equipment-legs
-- [x] generic
-- [x] guardian
-- [x] ice
-- [x] ice-wizard
-- [x] illusionist
-- [x] light-illusionist
-- [x] lightning
-- [x] light
-- [x] light-warrior
-- [x] mechanologist
-- [x] ninja
-- [x] ranger
-- [x] resource
-- [x] runeblade
-- [x] shadow-brute
-- [x] shadow
-- [x] shadow-runeblade
-- [x] warrior
-- [x] weapon
-- [x] wizard
+assassin
+brute
+draconic-illusionist
+draconic-ninja
+earth
+elemental-guardian
+elemental
+elemental-ranger
+elemental-runeblade
+elemental-wizard
+equipment-chest
+equipment-legs
+generic
+guardian
+ice
+ice-wizard
+illusionist
+light-illusionist
+lightning
+light
+light-warrior
+mechanologist
+ninja
+ranger
+resource
+runeblade
+shadow-brute
+shadow
+shadow-runeblade
+warrior
+weapon
+wizard
