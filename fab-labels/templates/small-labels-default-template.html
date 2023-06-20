@@ -6,10 +6,10 @@
 <div id="flex-container">
     {% for hero_class in requested_hero_classes %}
             <!-- TEMPLATE -->
-            <div id="label" class="outline-small" style="background-color: {{ label_background_color }};">
-                <div id="label" class="icon">
-                    <img src="static/frames/{{ hero_class }}.png" class="rotate90">
-                </div>
+            <div id="label" class="outline-small" style="background-color: {{ label_background_color }}; background-image: url('static/frames/rotated/{{ hero_class }}.png'); background-repeat: no-repeat;">
+                <!-- <div id="label" class="icon"> -->
+                <!--     <img src="static/frames/{{ hero_class }}.png" class="rotate90"> -->
+                <!-- </div> -->
                 <div id="label" class="expansionname">
                     {{ hero_class }}
                 </div>
