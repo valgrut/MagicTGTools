@@ -45,10 +45,11 @@ div#label.outline-small {
 div#label.expansionname {
     /* border: 1px solid blue; */
     /* background-color: blue; */
+    font-family: Bradley Hand, cursive;
     width: 100%;
     /* top: 0.7cm; */
     float: left;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
 }
 
