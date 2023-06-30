@@ -1,6 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash, escape
 from os.path import exists
-import wget
 import csv
 import sys
 import ssl
