@@ -22,8 +22,22 @@ div#label {
     padding: 0px;
 }
 
+div#label.outline-small:first-child {
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    /* border-radius: 5px; */
+    /* background-image: url("mramor.jpg"); */
+    /* background-position: center; */
+    /* background-size: cover; */
+    width: 6cm;
+    height: 1cm;
+}
+
 div#label.outline-small {
-    border: 1px solid black;
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
     /* border-radius: 5px; */
     /* background-image: url("mramor.jpg"); */
     /* background-position: center; */

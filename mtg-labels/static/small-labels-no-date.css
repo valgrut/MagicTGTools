@@ -22,10 +22,21 @@ div#label {
     padding: 0px;
 }
 
-div#label.outline-small {
+div#label.outline-small:first-child {
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
     width: 6cm;
     height: 1cm;
-    border: 1px solid black;
+    display: block;
+}
+
+div#label.outline-small {
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    width: 6cm;
+    height: 1cm;
     display: block;
 }
 
