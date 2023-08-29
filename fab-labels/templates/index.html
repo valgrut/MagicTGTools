@@ -29,6 +29,17 @@
 
 </ul>
 
+<script>
+function setAllCheckboxes(divId, sourceCheckbox) {
+    divElement = document.getElementById(divId);
+    inputElements = divElement.getElementsByTagName('input');
+    for (i = 0; i < inputElements.length; i++) {
+        if (inputElements[i].type != 'checkbox')
+            continue;
+        inputElements[i].checked = sourceCheckbox.checked;
+    }
+}
+</script>
 
 <table>
 <form action="/generated-labels" method="POST" enctype="multipart/form-data">
@@ -37,7 +48,8 @@
             List of Expansion shortcut(s):
         </th>
         <td>
-            <fieldset>
+            <p><input onClick="setAllCheckboxes('hero_classes', this);" type="checkbox" />Select All</p>
+            <fieldset id="hero_classes">
                 {% for class in AVAILABLE_CLASSES %}
                     <input type="checkbox" name="hero_classes" value="{{ class }}">{{ class }}</br>
                 {% endfor %}
