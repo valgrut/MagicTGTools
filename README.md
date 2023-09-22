@@ -2,9 +2,9 @@
 
 Welcome on MagicTGTools!
 
-You will find here some (hopefuly) useful tools for Magic The Gathering:
+You will find here some (hopefully) useful tools for Magic The Gathering and Flesh And Blood:
 
-- [**Label Generator**](mtg-labels/)
+- [**MTG Labels Generator**](mtg-labels/)
 
     Generate and print labels to organize your ever growing collection.
  
@@ -20,6 +20,9 @@ You will find here some (hopefuly) useful tools for Magic The Gathering:
         </thead>
     </table>
     
+- [**FaB Labels Generator**](fab-labels/)
+
+    Generate and print labels to organize your ever growing collection.
 
 - [**Deck URL Generator**](deck-url-generator/)
 
