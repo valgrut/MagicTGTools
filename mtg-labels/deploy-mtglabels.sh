@@ -3,7 +3,10 @@
 # 1. On server:
 rm -rf /home/picluster/Configs/mtg-labels/*
 sudo docker-compose stop mtglabels
+sudo docker rm mtglabels
 sudo docker image rm mtglabels
+sudo docker image rm valgrut/mtg-labels
+sudo docker ps -a
 
 # 2. On PC:
 scp -r mtg-labels picluster@192.168.88.245:/home/picluster/Configs/mtg-labels
