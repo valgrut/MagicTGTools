@@ -14,7 +14,7 @@ scp -r mtg-labels picluster@192.168.88.245:/home/picluster/Configs/mtg-labels
 
 # 3. On Server
 sudo docker login
-sudo docker build --tag valgrut/latest .
+sudo docker build --tag valgrut/mtg-labels .
 sudo docker push valgrut/mtg-labels
 sudo docker-compose up -d mtglabels
 
