@@ -6,7 +6,7 @@ sudo docker-compose stop mtglabels
 sudo docker image rm mtglabels
 
 # 2. On PC:
-scp mtg-labels picluster@192.168.88.245:/home/picluster/Configs/mtg-labels
+scp -r mtg-labels picluster@192.168.88.245:/home/picluster/Configs/mtg-labels
 ##TODO: Why? I can just pull the new version of Repository...
 
 # 3. On Server
