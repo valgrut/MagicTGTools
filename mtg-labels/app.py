@@ -1,4 +1,5 @@
-from flask import Flask, redirect, url_for, render_template, request, session, flash, escape
+from flask import Flask, redirect, url_for, render_template, request, session, flash
+from markupsafe import escape
 from os.path import exists
 import wget
 import csv

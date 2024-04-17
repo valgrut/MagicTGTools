@@ -47,6 +47,7 @@ Clone this repository and run server *locally*:
 ```
     export FLASK_ENV=development
     export FLASK_APP=app
+    pip3 install -r requirements.txt
     flask run
 ```
 
