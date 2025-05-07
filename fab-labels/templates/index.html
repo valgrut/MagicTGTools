@@ -5,29 +5,11 @@
 
 <div class="container">
 
-<h2>Magic The Gathering - Label generator</h2>
+<h2>Flesh and Blood - Label generator</h2>
 
 <p>
-    <b>1.</b> Fill the list of shortcuts of such expansions, you want to generate labels for.
+    This tool generates labels for Flesh and Blood cards.
 </p>
-
-<p>
-    <b>2.</b> Select desired options, background, rarity, ...
-</p>
-
-<p>
-    <b>3.</b> Hit Generate and wait!
-</p>
-
-
-<h3>Input Examples</h3>
-<ul>
-    <li>SNC,VOW,KHM,WAR,GRN</li>
-    <li>khm, vow, mid, znr, afr, afr, iko</li>
-    <li>thb,  WAR,RNA,Grn, dom , iKo,snc</li>
-    <li><b>Latest sets</b>: {{ PREFILLED_SETS }}</li>
-
-</ul>
 
 <script>
 function setAllCheckboxes(divId, sourceCheckbox) {
@@ -39,13 +21,58 @@ function setAllCheckboxes(divId, sourceCheckbox) {
         inputElements[i].checked = sourceCheckbox.checked;
     }
 }
+
+function addCombination() {
+    const container = document.getElementById('combinations_container');
+    const combinationDiv = document.createElement('div');
+    combinationDiv.className = 'dual_class';
+    combinationDiv.innerHTML = `
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="dual_class_1">
+                            {% for class in AVAILABLE_CLASSES %}
+                                <option value="{{ class }}">{{ class }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="dual_class_2">
+                            {% for class in AVAILABLE_CLASSES %}
+                                <option value="{{ class }}">{{ class }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <button type="button" onclick="removeCombination(this)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>      
+    `;
+    
+    // console.log(container.innerHTML);
+
+    // Append the new combination to the container
+    container.appendChild(combinationDiv);
+
+    // // Trigger a DOM refresh by dispatching an event
+    // const form = document.querySelector('form');
+    // const event = new Event('change', { bubbles: true });
+    // form.dispatchEvent(event);
+}
+
+function removeCombination(button) {
+    button.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
+}
 </script>
 
-<table>
 <form action="/generated-labels" method="POST" enctype="multipart/form-data">
+<table>
     <tr>
         <th>
-            List of Expansion shortcut(s):
+            List of classes:
         </th>
         <td>
             <p><input onClick="setAllCheckboxes('hero_classes', this);" type="checkbox" />Select All</p>
@@ -67,18 +94,29 @@ function setAllCheckboxes(divId, sourceCheckbox) {
                 <option value="small_labels_no_date">Small strip label - no date</option>
                 <option value="large_labels_basic">Large whole card label</option>
                 <option value="large_labels_basic_switched">large-labels-basic-switched</option>
-        <option value="narrow_labels_template">narrow-labels-template</option>
+                <option value="narrow_labels_template">narrow-labels-template</option>
                 <!-- LABEL_TYPE_COMMENT_TO_MATCH_FOR_SCRIPT -->
             </select>
         </td>
     </tr>
+
+    <tr>
+        <th>
+            Add dual cards:
+        </th>
+        <td>
+            <div id="combinations_container"></div>
+            <button type="button" onclick="addCombination()">Add Combination</button>
+        </td>
+    </tr>
+
     <tr>
         <td colspan="2">
             <input type="submit" class="submit" name="submit" value="Generate Labels!"/>
         </td>
     </tr>
-</form>
 </table>
+</form>
 
 <h3>Labels Examples</h3>
 <div class="flex-container">
@@ -91,10 +129,8 @@ function setAllCheckboxes(divId, sourceCheckbox) {
 
 <h3>Known issues</h3>
 <ul>
-    <li>Not all set symbols exist on the page, from which those set images are downloaded</li>
     <li>When generating too many labels, some overflow the A4 format and are split in half</li>
 </ul>
-</p>
 
 
 <div class="footer">

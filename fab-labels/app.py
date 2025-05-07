@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request, session, flash, escape
+from flask import Flask, redirect, url_for, render_template, request, session, flash
 from os.path import exists
 import csv
 import sys
@@ -13,7 +13,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 @app.route('/')
 def home():
-    csv_file = csv.reader(open('classes-frames.md', "r"), delimiter=";")
+    csv_file = csv.reader(open('available-classes.md', "r"), delimiter=";")
     available_classes = []
     for row in csv_file:
         available_classes += row
@@ -25,12 +25,31 @@ def home():
 @app.route('/generated-labels', methods = ['GET', 'POST'])
 def generate_labels():
     if request.method == 'POST':
+        # Process requested hero classes
         requested_hero_classes = []
         selected_hero_classes = request.form.getlist('hero_classes')
         for selected_class in selected_hero_classes:
             requested_hero_classes.append(selected_class)
         
         print(requested_hero_classes)
+
+        # Process requested dual class combinations
+        requested_combinations = []
+        print("form", request.form)
+        print("combination_container: ", request.form.getlist('combinations_container'))
+        print("dual class 1: ", request.form.getlist('dual_class_1[]'))
+        print("dual class 2: ", request.form.getlist('dual_class_2[]'))
+        print("combination: ", request.form.getlist('combination'))
+
+        selected_combination_1 = request.form.getlist('dual_class_1[]')
+        selected_combination_2 = request.form.getlist('dual_class_2[]')
+
+        # Pair up the combinations
+        for class1, class2 in zip(selected_combination_1, selected_combination_2):
+            requested_combinations.append((class1, class2))
+
+        print("Requested Combinations:", requested_combinations)
+
         
         label_type = request.form['label_type']
         symbol_size = "large"  #large, medium, small
@@ -60,11 +79,13 @@ def generate_labels():
         html_label_template = label_type_name+"-template.html"
         css_label_style = "static/"+label_type_name+".css"
 
-        return render_template(html_label_template, \
-                requested_hero_classes=requested_hero_classes, \
-                label_type=label_type, \
-                label_css_style=css_label_style \
-                )
+        return render_template(
+            html_label_template,
+            requested_hero_classes=requested_hero_classes,
+            requested_combinations=requested_combinations,
+            label_type=label_type,
+            label_css_style=css_label_style
+            )
 
 
 if __name__ == "__main__":
