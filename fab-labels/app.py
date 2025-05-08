@@ -33,16 +33,10 @@ def generate_labels():
         
         print(requested_hero_classes)
 
-        # Process requested dual class combinations
+        # Process requested dual cards
         requested_combinations = []
-        print("form", request.form)
-        print("combination_container: ", request.form.getlist('combinations_container'))
-        print("dual class 1: ", request.form.getlist('dual_class_1[]'))
-        print("dual class 2: ", request.form.getlist('dual_class_2[]'))
-        print("combination: ", request.form.getlist('combination'))
-
-        selected_combination_1 = request.form.getlist('dual_class_1[]')
-        selected_combination_2 = request.form.getlist('dual_class_2[]')
+        selected_combination_1 = request.form.getlist('dual_class_1')
+        selected_combination_2 = request.form.getlist('dual_class_2')
 
         # Pair up the combinations
         for class1, class2 in zip(selected_combination_1, selected_combination_2):
@@ -50,7 +44,13 @@ def generate_labels():
 
         print("Requested Combinations:", requested_combinations)
 
-        
+        # Process requested card colors
+        requested_card_colors = []
+        selected_card_colors = request.form.getlist('colors')
+        for selected_color in selected_card_colors:
+            requested_card_colors.append(selected_color)
+
+        # Process requested label type
         label_type = request.form['label_type']
         symbol_size = "large"  #large, medium, small
 
@@ -83,6 +83,7 @@ def generate_labels():
             html_label_template,
             requested_hero_classes=requested_hero_classes,
             requested_combinations=requested_combinations,
+            card_colors=requested_card_colors,
             label_type=label_type,
             label_css_style=css_label_style
             )

@@ -1,7 +1,9 @@
 - [x] assassin
 - [x] brute
+- [ ] draconic
 - [x] draconic-illusionist
 - [x] draconic-ninja
+- [ ] draconic-warrior
 - [x] earth
 - [x] elemental
 - [x] elemental-guardian
@@ -20,6 +22,7 @@
 - [x] light-warrior
 - [x] lightning
 - [x] mechanologist
+- [ ] mystic
 - [x] mystic-assassin 
 - [x] mystic-illusionist
 - [x] mystic-ninja
