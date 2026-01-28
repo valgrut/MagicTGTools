@@ -55,6 +55,7 @@ def generate_labels():
         split_list_of_expansions = [expansion.strip() for expansion in raw_split_list_of_expansions]
         # print(split_list_of_expansions)
 
+        # TODO: Refactor this madness
         set_info_list = []
         for expansion in split_list_of_expansions:
             for label_rarity in selected_label_rarities:
