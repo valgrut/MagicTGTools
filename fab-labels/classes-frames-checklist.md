@@ -1,9 +1,9 @@
 - [x] assassin
 - [x] brute
-- [ ] draconic
+- [x] draconic
 - [x] draconic-illusionist
 - [x] draconic-ninja
-- [ ] draconic-warrior
+- [x] draconic-warrior
 - [x] earth
 - [x] elemental
 - [x] elemental-guardian
@@ -22,13 +22,22 @@
 - [x] light-warrior
 - [x] lightning
 - [x] mechanologist
-- [ ] mystic
+- [x] mystic
 - [x] mystic-assassin 
 - [x] mystic-illusionist
 - [x] mystic-ninja
 - [x] ninja
+- [x] pirate-mechanologist
+- [x] pirate-necromancer
+- [x] pirate-ranger
 - [x] ranger
 - [x] resource
+- [x] revered
+- [x] revered-brute
+- [x] revered-guardian
+- [x] reviled
+- [x] reviled-brute
+- [x] reviled-guardian
 - [x] runeblade
 - [x] shadow
 - [x] shadow-brute
