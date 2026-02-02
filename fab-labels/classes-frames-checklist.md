@@ -1,3 +1,9 @@
+- [ ] chaos
+- [ ] earth-runeblade
+- [ ] earth-wizard
+- [ ] ice-guardian
+- [ ] lightning-runeblade
+- [ ] lightning-wizard
 - [x] assassin
 - [x] brute
 - [x] draconic
