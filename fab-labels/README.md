@@ -1,5 +1,10 @@
 # README
 
+### Run app from CLI
+
+```
+flask run
+```
 
 
 ### Notes of how to cut the frames from the cards
