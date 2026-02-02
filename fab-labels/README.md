@@ -21,3 +21,11 @@
     - New template (in case of new frames)
     - PNG (save just the cutted frame)
 13. Flip the new PNG frame 90 degrees to the right (so the flat edge is on the top)
+
+
+### Rotate image 90 degrees to the right
+
+```
+cd static/frames/
+find . -maxdepth 1 -type f -name "*.png" -exec magick ./{} -rotate 90 ./rotated/{} \;
+```
