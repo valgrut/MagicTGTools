@@ -1,16 +1,13 @@
-- [ ] chaos
-- [ ] earth-runeblade
-- [ ] earth-wizard
-- [ ] ice-guardian
-- [ ] lightning-runeblade
-- [ ] lightning-wizard
 - [x] assassin
 - [x] brute
+- [x] chaos
 - [x] draconic
 - [x] draconic-illusionist
 - [x] draconic-ninja
 - [x] draconic-warrior
 - [x] earth
+- [x] earth-runeblade
+- [x] earth-wizard
 - [x] elemental
 - [x] elemental-guardian
 - [x] elemental-ranger
@@ -21,12 +18,15 @@
 - [x] generic
 - [x] guardian
 - [x] ice
+- [x] ice-guardian
 - [x] ice-wizard
 - [x] illusionist
 - [x] light
 - [x] light-illusionist
 - [x] light-warrior
 - [x] lightning
+- [x] lightning-runeblade
+- [x] lightning-wizard
 - [x] mechanologist
 - [x] mystic
 - [x] mystic-assassin 
@@ -45,9 +45,11 @@
 - [x] reviled-brute
 - [x] reviled-guardian
 - [x] runeblade
+- [x] scurv
 - [x] shadow
 - [x] shadow-brute
 - [x] shadow-runeblade
+- [x] shapeshifter
 - [x] warrior
 - [x] weapon
 - [x] wizard
