@@ -24,6 +24,8 @@
 - [ ] pohrat si s 'border-radius: 25px;' a zkusit, jak by to vypadalo. Pripadne pridat option do formulare.
 - [x] Moct vygenerovat jednu sadu labelu odevseho - vsechny rarity, vsechny barvy ale vse 1x pro jednu danou sadu (expanzi).
 - [ ] Fetch info about sets (release date, full name, shortcut) from web, to reduce manual work.
+- [ ] Use venv
+- [ ] Fix: Some labels stays black. Coloring does not work for them (turtle ninjas, tarkir, spiderman, ...)
 
 # Testing
 - [ ] **Otestovat na FF, Chrome, Edge, Opera.**
